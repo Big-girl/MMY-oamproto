@@ -1,4 +1,4 @@
-module test.momencloud.com/home/wangxu/repositories/oamproto
+module github.com/Big-girl/MMY-oamproto
 
 go 1.18
 
