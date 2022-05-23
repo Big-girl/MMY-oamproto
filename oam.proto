@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+import "google/api/annotations.proto";
+import "ping.proto";
+import "cliflags.proto";
+import "client.proto";
+// 在proto目录下执行下面两个命令
+// protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --go_out=. --go-grpc_out=require_unimplemented_servers=false:. *.proto
+// protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --grpc-gateway_out=logtostderr=true:. *.proto
+service OAMServer{
+     // 服务测试接口
+     rpc Ping(Pong)returns(Pong){
+        option (google.api.http) ={
+            get:"/ping"
+        };
+    }
+    // 获取客户端日志标记
+    rpc GetCliLogFlags(GetCliFlagsRequest)returns(GetCliLogFlagsReply){
+        option (google.api.http) ={
+            post:"/oam/get/logflags"
+            body:"*"
+        };
+    }
+     // 获取客户端允许升级标记
+     rpc GetCliUpFlags(GetCliFlagsRequest)returns(GetCliUpFlagsReply){
+        option (google.api.http) ={
+            post:"/oam/get/upflags"
+            body:"*"
+        };
+    }
+    // 接受客户端信息从租户
+    rpc AcceptClientList(AcceptClientListRequest)returns(AcceptClientListReply){
+        option (google.api.http)= {
+            post:"/oam/accept/clients"
+            body:"*"
+        };
+    }
+    // 获取客户端列表
+     rpc ListClient(ListClientRequest)returns(ListClientReply){
+        option (google.api.http)= {
+            post:"/oam/list/client"
+            body:"*"
+        };
+    }
+    // 获取单个客户端
+     rpc GetClient(ListClientRequest)returns(OAMClient){
+        option (google.api.http)= {
+            post:"/oam/get/client"
+            body:"*"
+        };
+    }
+    // 批量更新客户端
+    rpc BatchUpdateClientFlags(BatchUpdateClientFlagsRequest)returns(UpdateClientReply){
+        option (google.api.http)= {
+            post:"/oam/put/cliflags"
+            body:"*"
+        };
+    }
+}
+

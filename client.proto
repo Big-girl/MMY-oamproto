@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+// OAMServer的客户端信息(从租户那边推过来的数据格式)
+message OAMClientAccept{
+    // 客户端ID
+    string id = 1;
+    // 租户ID
+    string tenantid = 2;
+    // 版本号
+    string version = 3;
+    // 系统信息
+    string systeminfo =4;
+    // ip
+    string ip = 5;
+    // mac地址
+    string mac = 6;
+    // 最后登录时间
+    int64 lasttime = 7;
+    // 是否卸载
+    bool uninstall = 8;
+    // 客户端服务及对应状态
+    string sdstatus = 9;
+     // app的版本信息
+    string appversion = 11;
+    // 标记
+    string otherflags = 10;
+    // 客户端动态库的版本
+    string verdll = 12;
+}
+
+// OAMServer的客户端信息(返回给前端的)
+message OAMClient{
+    // 客户端ID
+    string id = 1;
+    // 租户ID
+    string tenantid = 2;
+    // 版本号
+    string version = 3;
+    // 系统信息
+    string systeminfo =4;
+    // ip
+    string ip = 5;
+    // mac地址
+    string mac = 6;
+    // 最后登录时间
+    int64 lasttime = 7;
+    // 是否卸载
+    bool uninstall = 8;
+    // 客户端服务及对应状态
+    map<string,int32> sdstatus = 9;
+     // app的版本信息
+     map<string,string> appversion = 11;
+    // 标记
+    string otherflags = 10;
+    // 客户端动态库的版本
+    string verdll = 12;
+}
+
+// 客户端信息-各种标记
+message Otherflags{
+    int32 doc = 10;
+    int32 up = 11;
+    map<string,int32> log = 12;
+}
+
+// 接受客户端信息的请求参数
+message AcceptClientListRequest{
+// 每个接口都需要的校验参数
+    // 租户ID
+    string ti = 1;
+    // 客户端ID
+    string ci = 2;
+    // 密码
+    string tag = 3;
+    // 时间戳
+    string t = 4;
+    
+// 真正的接口业务参数
+    // 客户端的信息
+    repeated OAMClientAccept list = 20;
+}
+
+// 接受客户端信息的响应参数
+message AcceptClientListReply{
+    // 错误码
+    int32 code = 1;
+    // 提示信息
+    string message = 2;
+    // 影响行数
+    int64 affectedrows = 3;        
+}
+
+// 获取客户端列表的请求参数
+message ListClientRequest{
+    // 客户端ID
+    string id = 1;
+    // 多个客户端ID
+    repeated string ids = 2;
+    // 租户ID    
+    string tenantid = 3;
+    // 客户端版本信息
+    string version  =4;
+    // ip
+    string ip =5;
+    // mac address
+    string mac =6;
+    // 最后心跳时间
+    int64 lasttime =7;
+    // 是否卸载：1:是；2:否
+    int32 uninstall =8;
+
+    // 其他参数
+    // 分页参数：第几页
+    int64 pageindex =20;
+    // 分页参数：几条数据
+    int64 pagelimit =21;
+}
+
+// 获取客户端列表的响应参数
+message ListClientReply{
+    repeated OAMClient list = 1;
+    int64 totalcount = 2;
+}
+
+// 批量更新客户端的请求参数
+message BatchUpdateClientFlagsRequest{
+    // 更新条件
+    // 多个客户端ID
+    repeated string ids =1;
+    // 租户ID
+    string tenantid = 2;
+    
+    // 更新需要修改的东西
+    Otherflags obj =10;
+}
+
+// 更新客户端的响应参数
+message UpdateClientReply{
+    // 错误码
+    int32 code = 1;
+    // 提示信息
+    string message = 2;
+    // 影响行数
+    int64 affectedrows = 3;        
+}

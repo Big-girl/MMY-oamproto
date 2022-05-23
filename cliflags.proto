@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+// 获取客户标志的请求参数
+message GetCliFlagsRequest{
+    // 每个接口都需要的校验参数
+    // 租户ID
+    string ti = 1;
+    // 客户端ID
+    string ci = 2;
+    // 密码
+    string tag = 3;
+    // 时间戳
+    string t = 4;
+}
+
+// 获取客户端日志标志的响应参数
+message GetCliLogFlagsReply{
+    // 错误码
+    int32 code = 1;
+    // 客户端服务日志:logflag->是否开启debug日志;logupflag->是否上传日志
+    map<string,int32> log = 2;
+    // 下发SdDoc服务是否开机启动,1不允许,0允许
+    int32 doc = 3;
+}
+
+// 获取客户端升级标志的响应参数
+message GetCliUpFlagsReply{
+    // 错误码
+    int32 code = 1;
+    // 默认允许升级(0禁止,1允许)
+    int32 up = 2;
+}
