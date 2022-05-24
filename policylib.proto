@@ -1,0 +1,196 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+// 策略下发的请求参数
+message ReleasePolicyRequest{
+    /*下发的数据的类型：
+    1：泄漏分析的配置
+    2：进程分类
+    3：进程的配置库
+    4：搜索网站的配置库
+    5：后缀的配置库
+    6：网站大类
+    7：网站类
+    8：网站配置库
+    9：关键字分类
+    10：关键字配置库
+    11：应用程序钩子函数的入口
+    12：引用程序的版本管理
+    */ 
+    int32 type = 1;
+    repeated LeakAnalyConf leakanalyconf = 2;
+    repeated ProcessClass proccla = 3;
+    repeated ProcessLibrary prolib = 4;
+    repeated SearchWebsiteLibrary seaweblib = 5;
+    repeated SuffixLibrary sufflib = 6;
+    repeated WebsiteBigClass webbcla = 7;
+    repeated WebsiteClass webcla = 8;
+    repeated WebsiteLibrary weblib = 9;
+    repeated WordClass wordcla = 10;
+    repeated WordLibrary wordlib = 11;
+    repeated AppHook apphook = 12;
+    repeated AppVersion appv = 13;
+}
+
+// 策略下发的响应参数
+message ReleasePolicyReply{
+    // 状态码
+    int32 code = 1;
+    // 错误提示
+    string message = 2;
+    // 一共有几条数据
+    int64 rowsCount = 3;
+}
+
+// 泄漏分析配置
+message LeakAnalyConf {
+    // 配置类型：1：后缀；2：执行进程；3：路径
+    int32 type = 1;
+    // 配置的值
+    string conf = 2;
+    // 最后更新时间
+    int64 uptime = 3;
+    // 操作类型（增删改查）：这条记录是需要做怎样的处理，保持两个库表之间的一致性
+    int32 opr = 4;
+    // 程序
+    string process = 5;
+    // 配置控制类型：0：审计；1：管控
+    int32 ctrtype = 6;    
+}
+
+// 进程的类型
+message ProcessClass {
+    // id 
+    int32 id = 1;
+    // 名称
+    string name = 2;
+    // 描述
+    string descs = 3;
+}
+
+// 进程配置库
+message ProcessLibrary {
+    // id 
+    int64 id = 1;
+    // 进程分类ID：ProcessClass的ID
+    int32 classid =2;
+    // 进程名称
+    string processname = 3;
+    // 进程的执行文件名
+    string process = 4;
+    // 描述信息
+    string descs = 5;
+    // 最后更新时间
+    string timestamp = 6;
+    // 操作类型（增删改查）：这条记录是需要做怎样的处理，保持两个库表之间的一致性
+    string opr = 7;
+    // 出版公司
+    string company = 8;
+    // 管控类型
+    string type = 9;
+}
+
+// 搜索网站的配置库
+message SearchWebsiteLibrary{
+    // id
+    int64 id =1;
+    // 网站的名称
+    string websitename = 2;
+    // 开始的规则
+    string beginrule = 3;
+    // 结束的规则
+    string endrule =4;
+    // uri解析次数 
+    int64 times = 5;
+    // 域名
+    string domain = 6;
+}
+
+// 后缀的配置库
+message SuffixLibrary {
+    // 主键ID
+    int32 id = 1;
+    // 后缀值
+    string suffix = 2;
+    // 选中的状态：在租户端的话是否是放行的状态
+    int64 status = 3;
+    // 是否是系统的默认配置：1是，允许租户端自定义数据，会展示系统默认的值，不允许删除系统的配置
+    int32 system = 4;  
+}
+
+// 网站大类
+message WebsiteBigClass {
+    // 主键ID
+    int32 id = 1;
+    // 类名称
+    string name = 2; 
+}
+
+// 网站类
+message WebsiteClass {
+    // 主键ID
+    int32 id = 1;
+    // 类名称
+    string name = 2; 
+    // 上级分类ID：WebsiteBigClass的ID
+    string fatherclassid = 3; 
+    // 描述信息
+    string descs = 4; 
+}
+
+// 网站配置库
+message WebsiteLibrary {
+    // 主键ID
+    int32 id = 1;
+    // 类ID：WebsiteClass的ID
+    string classid = 2; 
+    // 上级分类ID：WebsiteBigClass的ID
+    string fatherclassid = 3; 
+    // 名称
+    string websitename = 4; 
+    // 域名
+    string domain = 5; 
+    // 描述信息
+    string descs = 6; 
+    // 最后更新时间
+    string timestamp = 7;
+    // 做同步库表，这个记录是用来做啥操作的 
+    string opr = 8; 
+}
+
+// 关键字分类
+message WordClass {
+    // 主键ID
+    int32 id = 1;
+    // 关键字分类名称
+    string name = 2; 
+    // 区分是文字的类型还是文件的类型：1：文字；2：文件
+    int32 type = 3; 
+}
+
+// 关键字配置库
+message WordLibrary {
+    // 主键ID
+    int32 id = 1;
+    // 关键字
+    string name = 2; 
+    // 分类ID：WordClass的ID
+    int64 classid = 3;
+    // 区分是文字的类型还是文件的类型：1：文字；2：文件
+    int32 type = 4; 
+    // 最后更新时间
+    int64 timestamp = 5; 
+}
+
+// 应用程序钩子函数的入口
+message AppHook{
+    // 数据比较灵活所有用string返回
+    string data = 1;
+}
+
+// 引用程序的版本管理
+message AppVersion{
+    // 数据比较灵活所有用string返回
+    string data = 1;
+}

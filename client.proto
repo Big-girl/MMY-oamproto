@@ -2,6 +2,18 @@ syntax = "proto3";
 
 option go_package = ".;proto";
 
+message CheckObj{
+// 每个接口都需要的校验参数
+    // 租户ID
+    string ti = 1;
+    // 客户端ID
+    string ci = 2;
+    // 密码
+    string tag = 3;
+    // 时间戳
+    string t = 4;
+}
+
 // OAMServer的客户端信息(从租户那边推过来的数据格式)
 message OAMClientAccept{
     // 客户端ID
@@ -67,17 +79,8 @@ message Otherflags{
 
 // 接受客户端信息的请求参数
 message AcceptClientListRequest{
-// 每个接口都需要的校验参数
-    // 租户ID
-    string ti = 1;
-    // 客户端ID
-    string ci = 2;
-    // 密码
-    string tag = 3;
-    // 时间戳
-    string t = 4;
-    
-// 真正的接口业务参数
+    // 校验参数
+    CheckObj co = 1;    
     // 客户端的信息
     repeated OAMClientAccept list = 20;
 }
@@ -94,6 +97,8 @@ message AcceptClientListReply{
 
 // 获取客户端列表的请求参数
 message ListClientRequest{
+    // 校验参数
+    CheckObj co = 100;  
     // 客户端ID
     string id = 1;
     // 多个客户端ID
@@ -126,6 +131,8 @@ message ListClientReply{
 
 // 批量更新客户端的请求参数
 message BatchUpdateClientFlagsRequest{
+     // 校验参数
+     CheckObj co = 100;  
     // 更新条件
     // 多个客户端ID
     repeated string ids =1;
