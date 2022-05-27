@@ -122,6 +122,7 @@ message ListPolicyReply{
     int32 dtype = 1;
     // 符合条件的数据总条数
     int32 totalcount = 2;
+    // 配置数据
     repeated LeakAnalyConf leakanalyconf = 21;
     repeated ProcessClass proccla = 22;
     repeated ProcessLibrary prolib = 23;

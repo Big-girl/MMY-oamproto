@@ -661,7 +661,8 @@ type ListPolicyReply struct {
 	// 操作的数据类型
 	Dtype int32 `protobuf:"varint,1,opt,name=dtype,proto3" json:"dtype,omitempty"`
 	// 符合条件的数据总条数
-	Totalcount    int32                   `protobuf:"varint,2,opt,name=totalcount,proto3" json:"totalcount,omitempty"`
+	Totalcount int32 `protobuf:"varint,2,opt,name=totalcount,proto3" json:"totalcount,omitempty"`
+	// 配置数据
 	Leakanalyconf []*LeakAnalyConf        `protobuf:"bytes,21,rep,name=leakanalyconf,proto3" json:"leakanalyconf,omitempty"`
 	Proccla       []*ProcessClass         `protobuf:"bytes,22,rep,name=proccla,proto3" json:"proccla,omitempty"`
 	Prolib        []*ProcessLibrary       `protobuf:"bytes,23,rep,name=prolib,proto3" json:"prolib,omitempty"`
