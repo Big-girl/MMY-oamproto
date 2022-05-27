@@ -18,7 +18,13 @@ message ReleasePolicyRequest{
     11：应用程序钩子函数的入口
     12：引用程序的版本管理
     */ 
-    int32 type = 1;
+    int32 dtype = 1;
+}
+
+// 新增策略的相关接口的请求参数
+message AddPolicyRequest{
+    // 操作的数据类型
+    int32 dtype = 1;
     repeated LeakAnalyConf leakanalyconf = 2;
     repeated ProcessClass proccla = 3;
     repeated ProcessLibrary prolib = 4;
@@ -29,18 +35,123 @@ message ReleasePolicyRequest{
     repeated WebsiteLibrary weblib = 9;
     repeated WordClass wordcla = 10;
     repeated WordLibrary wordlib = 11;
-    repeated AppHook apphook = 12;
-    repeated AppVersion appv = 13;
+    string apphook = 12;
+    string appv = 13;
 }
 
-// 策略下发的响应参数
-message ReleasePolicyReply{
+// 修改策略的请求参数
+message PutPolicyRequest{
+     // 操作的数据类型
+    int32 dtype = 1;
+    LeakAnalyConf leakanalyconf = 2;
+    ProcessClass proccla = 3;
+    ProcessLibrary prolib = 4;
+    SearchWebsiteLibrary seaweblib = 5;
+    SuffixLibrary sufflib = 6;
+    WebsiteBigClass webbcla = 7;
+    WebsiteClass webcla = 8;
+    WebsiteLibrary weblib = 9;
+    WordClass wordcla = 10;
+    WordLibrary wordlib = 11;
+    string apphook = 12;
+    string appv = 13;
+
+    // 更新数据的查询条件
+    PolicyQuery filter = 21;
+}
+
+// 操作类型接口的响应参数：增改删的响应参数
+message OperateReply{
     // 状态码
-    int32 code = 1;
-    // 错误提示
-    string message = 2;
-    // 一共有几条数据
+    int32 code =1;
+    // 错误消息提示
+    string message =2;
+    // 影响行数
     int64 rowsCount = 3;
+}
+
+// 根据条件获取数据的条件结构体的定义
+message PolicyQuery{
+    // 操作的哪一个数据表
+    int32 dtype = 1;
+
+    // 查询条件：比较通用的
+    // 主键ID
+    int64 id = 11;
+    // 多个主键ID
+    repeated int64 ids = 12;
+    // 操作类型：增改删->312
+    int32 opr = 13;
+    // 最后更新时间大于某个时间
+    int64 starttime = 14;
+
+    // 具体的表查询条件：通用写到这里，具体的查询会在model层做限制
+    // 比较灵活的查询条件：具体使用看接口
+    map<string,string> filter = 31;
+     // 配置信息：processclass
+     string name = 32;
+    // 配置信息：leak会用到
+    string conf = 33;
+    // 配置信息：leak会用到
+    string process = 34;
+    // 配置信息：leak,processLibrary会用到
+    int32 ctltype = 35;
+    // 分类id:processLibrary
+    repeated int32 classids = 36;
+    // 发行公司：processLibrary
+    string company = 37;
+    // 父级分类id：websiteLibrary
+    repeated int32 fatherclassids = 38;
+    // 域名:websiteLibrary
+    string domain = 39;
+    // 后缀的值:searchwebsiteLibrary
+    string suffix = 40;
+    // 数据类型：wordClass
+    int32 type = 41;
+
+    // 工具参数
+    // 分页参数：当前页数
+    int64 pageindex = 51;
+    // 分页参数：返回几条数据
+    int64 pagelimit =52;
+}
+
+// 获取策略列表的响应参数
+message ListPolicyReply{
+    // 操作的数据类型
+    int32 dtype = 1;
+    // 符合条件的数据总条数
+    int32 totalcount = 2;
+    repeated LeakAnalyConf leakanalyconf = 21;
+    repeated ProcessClass proccla = 22;
+    repeated ProcessLibrary prolib = 23;
+    repeated SearchWebsiteLibrary seaweblib = 24;
+    repeated SuffixLibrary sufflib = 25;
+    repeated WebsiteBigClass webbcla = 26;
+    repeated WebsiteClass webcla = 27;
+    repeated WebsiteLibrary weblib = 28;
+    repeated WordClass wordcla = 29;
+    repeated WordLibrary wordlib = 30;
+    string apphook = 31;
+    string appv = 32;
+}
+
+// 获取单个策略的响应参数
+message GetPolicyReply{
+    // 操作的数据类型
+    int32 dtype = 1;
+    LeakAnalyConf leakanalyconf = 2;
+    ProcessClass proccla = 3;
+    ProcessLibrary prolib = 4;
+    SearchWebsiteLibrary seaweblib = 5;
+    SuffixLibrary sufflib = 6;
+    WebsiteBigClass webbcla = 7;
+    WebsiteClass webcla = 8;
+    WebsiteLibrary weblib = 9;
+    WordClass wordcla = 10;
+    WordLibrary wordlib = 11;
+    string apphook = 12;
+    string appv = 13;
 }
 
 // 泄漏分析配置
@@ -67,6 +178,10 @@ message ProcessClass {
     string name = 2;
     // 描述
     string descs = 3;
+    // 最后更新时间
+    int64 uptime = 4;
+    // 操作类型
+    int32 opr = 5;
 }
 
 // 进程配置库
@@ -82,13 +197,13 @@ message ProcessLibrary {
     // 描述信息
     string descs = 5;
     // 最后更新时间
-    string timestamp = 6;
+    int64 uptime = 6;
     // 操作类型（增删改查）：这条记录是需要做怎样的处理，保持两个库表之间的一致性
-    string opr = 7;
+    int32 opr = 7;
     // 出版公司
     string company = 8;
     // 管控类型
-    string type = 9;
+    int32 ctrtype = 9;
 }
 
 // 搜索网站的配置库
@@ -105,6 +220,10 @@ message SearchWebsiteLibrary{
     int64 times = 5;
     // 域名
     string domain = 6;
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
 }
 
 // 后缀的配置库
@@ -116,7 +235,11 @@ message SuffixLibrary {
     // 选中的状态：在租户端的话是否是放行的状态
     int64 status = 3;
     // 是否是系统的默认配置：1是，允许租户端自定义数据，会展示系统默认的值，不允许删除系统的配置
-    int32 system = 4;  
+    bool system = 4; 
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22; 
 }
 
 // 网站大类
@@ -125,6 +248,10 @@ message WebsiteBigClass {
     int32 id = 1;
     // 类名称
     string name = 2; 
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
 }
 
 // 网站类
@@ -134,19 +261,25 @@ message WebsiteClass {
     // 类名称
     string name = 2; 
     // 上级分类ID：WebsiteBigClass的ID
-    string fatherclassid = 3; 
+    int32 fatherclassid = 3; 
     // 描述信息
-    string descs = 4; 
+    string descs = 4;
+    // 选中状态
+    bool status = 5;
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22; 
 }
 
 // 网站配置库
 message WebsiteLibrary {
     // 主键ID
-    int32 id = 1;
+    int64 id = 1;
     // 类ID：WebsiteClass的ID
-    string classid = 2; 
+    int32 classid = 2; 
     // 上级分类ID：WebsiteBigClass的ID
-    string fatherclassid = 3; 
+    int32 fatherclassid = 3; 
     // 名称
     string websitename = 4; 
     // 域名
@@ -154,9 +287,9 @@ message WebsiteLibrary {
     // 描述信息
     string descs = 6; 
     // 最后更新时间
-    string timestamp = 7;
+    int64 uptime = 7;
     // 做同步库表，这个记录是用来做啥操作的 
-    string opr = 8; 
+    int32 opr = 8; 
 }
 
 // 关键字分类
@@ -167,30 +300,24 @@ message WordClass {
     string name = 2; 
     // 区分是文字的类型还是文件的类型：1：文字；2：文件
     int32 type = 3; 
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
 }
 
 // 关键字配置库
 message WordLibrary {
     // 主键ID
-    int32 id = 1;
+    int64 id = 1;
     // 关键字
     string name = 2; 
     // 分类ID：WordClass的ID
-    int64 classid = 3;
+    int32 classid = 3;
     // 区分是文字的类型还是文件的类型：1：文字；2：文件
     int32 type = 4; 
     // 最后更新时间
-    int64 timestamp = 5; 
-}
-
-// 应用程序钩子函数的入口
-message AppHook{
-    // 数据比较灵活所有用string返回
-    string data = 1;
-}
-
-// 引用程序的版本管理
-message AppVersion{
-    // 数据比较灵活所有用string返回
-    string data = 1;
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
 }

@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "ping.proto";
 import "cliflags.proto";
 import "client.proto";
-// import "policylib.proto";
+import "policylib.proto";
 // 在proto目录下执行下面两个命令
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --go_out=. --go-grpc_out=require_unimplemented_servers=false:. *.proto
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --grpc-gateway_out=logtostderr=true:. *.proto
@@ -56,6 +56,48 @@ service OAMServer{
     rpc BatchUpdateClientFlags(BatchUpdateClientFlagsRequest)returns(UpdateClientReply){
         option (google.api.http)= {
             post:"/oam/put/cliflags"
+            body:"*"
+        };
+    }
+     // 策略下发:先放在这里
+     rpc ReleasePolicy(ReleasePolicyRequest)returns(ListPolicyReply){
+        option (google.api.http)= {
+            post:"/oam/release/policy"
+            body:"*"
+        };
+    }
+    // 新增策略
+    rpc AddPolicy(AddPolicyRequest)returns(OperateReply){
+        option (google.api.http)= {
+            post:"/oam/add/policy"
+            body:"*"
+        };
+    }
+    // 修改
+    rpc PutPolicy(PutPolicyRequest)returns(OperateReply){
+        option (google.api.http)= {
+            post:"/oam/update/policy"
+            body:"*"
+        };
+    }
+    // 删除
+    rpc DelPolicy(PolicyQuery)returns(OperateReply){
+        option (google.api.http)= {
+            post:"/oam/delete/policy"
+            body:"*"
+        };
+    }
+    // 获取列表
+    rpc ListPolicy(PolicyQuery)returns(ListPolicyReply){
+        option (google.api.http)= {
+            post:"/oam/list/policy"
+            body:"*"
+        };
+    }
+    // 获取单个
+    rpc GetPolicy(PolicyQuery)returns(GetPolicyReply){
+        option (google.api.http)= {
+            post:"/oam/get/policy"
             body:"*"
         };
     }

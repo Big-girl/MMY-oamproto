@@ -36,6 +36,18 @@ type OAMServerClient interface {
 	GetClient(ctx context.Context, in *ListClientRequest, opts ...grpc.CallOption) (*OAMClient, error)
 	// 批量更新客户端
 	BatchUpdateClientFlags(ctx context.Context, in *BatchUpdateClientFlagsRequest, opts ...grpc.CallOption) (*UpdateClientReply, error)
+	// 策略下发:先放在这里
+	ReleasePolicy(ctx context.Context, in *ReleasePolicyRequest, opts ...grpc.CallOption) (*ListPolicyReply, error)
+	// 新增策略
+	AddPolicy(ctx context.Context, in *AddPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error)
+	// 修改
+	PutPolicy(ctx context.Context, in *PutPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error)
+	// 删除
+	DelPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*OperateReply, error)
+	// 获取列表
+	ListPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*ListPolicyReply, error)
+	// 获取单个
+	GetPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*GetPolicyReply, error)
 }
 
 type oAMServerClient struct {
@@ -109,6 +121,60 @@ func (c *oAMServerClient) BatchUpdateClientFlags(ctx context.Context, in *BatchU
 	return out, nil
 }
 
+func (c *oAMServerClient) ReleasePolicy(ctx context.Context, in *ReleasePolicyRequest, opts ...grpc.CallOption) (*ListPolicyReply, error) {
+	out := new(ListPolicyReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/ReleasePolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) AddPolicy(ctx context.Context, in *AddPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error) {
+	out := new(OperateReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/AddPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) PutPolicy(ctx context.Context, in *PutPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error) {
+	out := new(OperateReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/PutPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) DelPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*OperateReply, error) {
+	out := new(OperateReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/DelPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) ListPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*ListPolicyReply, error) {
+	out := new(ListPolicyReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/ListPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) GetPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*GetPolicyReply, error) {
+	out := new(GetPolicyReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/GetPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -127,6 +193,18 @@ type OAMServerServer interface {
 	GetClient(context.Context, *ListClientRequest) (*OAMClient, error)
 	// 批量更新客户端
 	BatchUpdateClientFlags(context.Context, *BatchUpdateClientFlagsRequest) (*UpdateClientReply, error)
+	// 策略下发:先放在这里
+	ReleasePolicy(context.Context, *ReleasePolicyRequest) (*ListPolicyReply, error)
+	// 新增策略
+	AddPolicy(context.Context, *AddPolicyRequest) (*OperateReply, error)
+	// 修改
+	PutPolicy(context.Context, *PutPolicyRequest) (*OperateReply, error)
+	// 删除
+	DelPolicy(context.Context, *PolicyQuery) (*OperateReply, error)
+	// 获取列表
+	ListPolicy(context.Context, *PolicyQuery) (*ListPolicyReply, error)
+	// 获取单个
+	GetPolicy(context.Context, *PolicyQuery) (*GetPolicyReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -153,6 +231,24 @@ func (UnimplementedOAMServerServer) GetClient(context.Context, *ListClientReques
 }
 func (UnimplementedOAMServerServer) BatchUpdateClientFlags(context.Context, *BatchUpdateClientFlagsRequest) (*UpdateClientReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchUpdateClientFlags not implemented")
+}
+func (UnimplementedOAMServerServer) ReleasePolicy(context.Context, *ReleasePolicyRequest) (*ListPolicyReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReleasePolicy not implemented")
+}
+func (UnimplementedOAMServerServer) AddPolicy(context.Context, *AddPolicyRequest) (*OperateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPolicy not implemented")
+}
+func (UnimplementedOAMServerServer) PutPolicy(context.Context, *PutPolicyRequest) (*OperateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PutPolicy not implemented")
+}
+func (UnimplementedOAMServerServer) DelPolicy(context.Context, *PolicyQuery) (*OperateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelPolicy not implemented")
+}
+func (UnimplementedOAMServerServer) ListPolicy(context.Context, *PolicyQuery) (*ListPolicyReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPolicy not implemented")
+}
+func (UnimplementedOAMServerServer) GetPolicy(context.Context, *PolicyQuery) (*GetPolicyReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPolicy not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -292,6 +388,114 @@ func _OAMServer_BatchUpdateClientFlags_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_ReleasePolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReleasePolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ReleasePolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ReleasePolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ReleasePolicy(ctx, req.(*ReleasePolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_AddPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).AddPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/AddPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).AddPolicy(ctx, req.(*AddPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_PutPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).PutPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/PutPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).PutPolicy(ctx, req.(*PutPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_DelPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolicyQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).DelPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/DelPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).DelPolicy(ctx, req.(*PolicyQuery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_ListPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolicyQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ListPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ListPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ListPolicy(ctx, req.(*PolicyQuery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_GetPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PolicyQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).GetPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/GetPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).GetPolicy(ctx, req.(*PolicyQuery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -326,6 +530,30 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchUpdateClientFlags",
 			Handler:    _OAMServer_BatchUpdateClientFlags_Handler,
+		},
+		{
+			MethodName: "ReleasePolicy",
+			Handler:    _OAMServer_ReleasePolicy_Handler,
+		},
+		{
+			MethodName: "AddPolicy",
+			Handler:    _OAMServer_AddPolicy_Handler,
+		},
+		{
+			MethodName: "PutPolicy",
+			Handler:    _OAMServer_PutPolicy_Handler,
+		},
+		{
+			MethodName: "DelPolicy",
+			Handler:    _OAMServer_DelPolicy_Handler,
+		},
+		{
+			MethodName: "ListPolicy",
+			Handler:    _OAMServer_ListPolicy_Handler,
+		},
+		{
+			MethodName: "GetPolicy",
+			Handler:    _OAMServer_GetPolicy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
