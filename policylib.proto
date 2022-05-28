@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option go_package = ".;proto";
 
+import "client.proto";
+
 // 策略下发的请求参数
 message ReleasePolicyRequest{
     /*下发的数据的类型：
@@ -18,11 +20,17 @@ message ReleasePolicyRequest{
     11：应用程序钩子函数的入口
     12：引用程序的版本管理
     */ 
+    // 校验参数
+    CheckObj co = 100; 
+    // 操作的数据类型也就是数据表
     int32 dtype = 1;
+ 
 }
 
 // 新增策略的相关接口的请求参数
 message AddPolicyRequest{
+    // 校验参数
+    CheckObj co = 100; 
     // 操作的数据类型
     int32 dtype = 1;
     repeated LeakAnalyConf leakanalyconf = 2;
@@ -41,7 +49,9 @@ message AddPolicyRequest{
 
 // 修改策略的请求参数
 message PutPolicyRequest{
-     // 操作的数据类型
+    // 校验参数
+    CheckObj co = 100; 
+    // 操作的数据类型
     int32 dtype = 1;
     LeakAnalyConf leakanalyconf = 2;
     ProcessClass proccla = 3;
@@ -72,6 +82,8 @@ message OperateReply{
 
 // 根据条件获取数据的条件结构体的定义
 message PolicyQuery{
+    // 校验参数
+    CheckObj co = 200; 
     // 操作的哪一个数据表
     int32 dtype = 1;
 

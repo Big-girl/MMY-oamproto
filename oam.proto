@@ -14,7 +14,8 @@ service OAMServer{
      // 服务测试接口
      rpc Ping(Pong)returns(Pong){
         option (google.api.http) ={
-            get:"/ping"
+            post:"/ping",
+            body:"*"
         };
     }
     // 获取客户端日志标记
