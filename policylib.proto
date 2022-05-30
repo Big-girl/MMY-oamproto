@@ -24,6 +24,8 @@ message ReleasePolicyRequest{
     CheckObj co = 100; 
     // 操作的数据类型也就是数据表
     int32 dtype = 1;
+    // 上次更新的时间
+    int64 starttime = 2;
  
 }
 
