@@ -48,6 +48,8 @@ type OAMServerClient interface {
 	ListPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*ListPolicyReply, error)
 	// 获取单个
 	GetPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*GetPolicyReply, error)
+	// 获取modelVersion
+	ListModelVersion(ctx context.Context, in *ModelVersion, opts ...grpc.CallOption) (*ModelVersion, error)
 }
 
 type oAMServerClient struct {
@@ -175,6 +177,15 @@ func (c *oAMServerClient) GetPolicy(ctx context.Context, in *PolicyQuery, opts .
 	return out, nil
 }
 
+func (c *oAMServerClient) ListModelVersion(ctx context.Context, in *ModelVersion, opts ...grpc.CallOption) (*ModelVersion, error) {
+	out := new(ModelVersion)
+	err := c.cc.Invoke(ctx, "/OAMServer/ListModelVersion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -205,6 +216,8 @@ type OAMServerServer interface {
 	ListPolicy(context.Context, *PolicyQuery) (*ListPolicyReply, error)
 	// 获取单个
 	GetPolicy(context.Context, *PolicyQuery) (*GetPolicyReply, error)
+	// 获取modelVersion
+	ListModelVersion(context.Context, *ModelVersion) (*ModelVersion, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -249,6 +262,9 @@ func (UnimplementedOAMServerServer) ListPolicy(context.Context, *PolicyQuery) (*
 }
 func (UnimplementedOAMServerServer) GetPolicy(context.Context, *PolicyQuery) (*GetPolicyReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPolicy not implemented")
+}
+func (UnimplementedOAMServerServer) ListModelVersion(context.Context, *ModelVersion) (*ModelVersion, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListModelVersion not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -496,6 +512,24 @@ func _OAMServer_GetPolicy_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_ListModelVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModelVersion)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ListModelVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ListModelVersion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ListModelVersion(ctx, req.(*ModelVersion))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -554,6 +588,10 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPolicy",
 			Handler:    _OAMServer_GetPolicy_Handler,
+		},
+		{
+			MethodName: "ListModelVersion",
+			Handler:    _OAMServer_ListModelVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

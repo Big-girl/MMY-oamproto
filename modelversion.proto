@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+import "client.proto";
+
+message ModelVersion{
+    // 校验参数
+    CheckObj co = 1; 
+    // 返回数据的类型用map
+    map<string,int64> data = 11;
+}
