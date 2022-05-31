@@ -26,6 +26,8 @@ message ReleasePolicyRequest{
     int32 dtype = 1;
     // 上次更新的时间
     int64 starttime = 2;
+    // 这次对比的最后的时间
+    int64 endtime = 3;
  
 }
 
