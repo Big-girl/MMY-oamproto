@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+message CheckTenantObj{
+// 每个接口都需要的校验参数
+    // 租户ID
+    string ti = 1;
+    // 客户端ID
+    string ci = 2;
+    // 密码
+    string tag = 3;
+    // 时间戳
+    string t = 4;
+}
+
+// OAMServer的租户信息(从云平台那边推过来的数据格式)
+message OAMTenantAccept{
+    // 租户ID
+    string id = 1;
+    // 租户状态
+    int32 status = 2;
+    // 租户创建时间
+    int64 createtime = 3;
+    // 租户是否私有化部署
+    int32 private = 4;
+    // 租户部署后的地址
+    string ip = 5;
+    // 租户激活标记
+    int32 isactive = 6;
+}
+
+// 接受客户端信息的请求参数
+message AcceptTenantListRequest{
+    // 校验参数
+    CheckTenantObj co = 1;    
+    // 客户端的信息
+    repeated OAMTenantAccept list = 20;
+}
+
+// 接受客户端信息的响应参数
+message AcceptTenantListReply{
+    // 错误码
+    int32 code = 1;
+    // 提示信息
+    string message = 2;
+    // 影响行数
+    int64 affectedrows = 3;        
+}

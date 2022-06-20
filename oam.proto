@@ -8,6 +8,7 @@ import "cliflags.proto";
 import "client.proto";
 import "policylib.proto";
 import "modelversion.proto";
+import "tenant.proto";
 // 在proto目录下执行下面两个命令
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --go_out=. --go-grpc_out=require_unimplemented_servers=false:. *.proto
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --grpc-gateway_out=logtostderr=true:. *.proto
@@ -110,5 +111,13 @@ service OAMServer{
             body:"*"
         };
     }
+    // 接受客户端信息从租户
+    rpc AcceptTenantList(AcceptTenantListRequest)returns(AcceptTenantListReply){
+        option (google.api.http)= {
+            post:"/oam/accept/tenants"
+            body:"*"
+        };
+    }
+    // 获取租户所属平台的域名、OSS地址
 }
 
