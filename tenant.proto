@@ -18,16 +18,18 @@ message CheckTenantObj{
 message OAMTenantAccept{
     // 租户ID
     string id = 1;
+    // 平台id
+    int32 platid = 2;
     // 租户状态
-    bool status = 2;
+    bool status = 3;
     // 租户创建时间
-    int64 createtime = 3;
+    int64 createtime = 4;
     // 租户是否私有化部署
-    bool private = 4;
+    bool private = 5;
     // 租户部署后的地址
-    string ip = 5;
+    string ip = 6;
     // 租户激活标记
-    bool isactive = 6;
+    bool isactive = 7;
 }
 
 // 接受客户端信息的请求参数
