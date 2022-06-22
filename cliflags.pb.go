@@ -222,6 +222,149 @@ func (x *GetCliUpFlagsReply) GetUp() int32 {
 	return 0
 }
 
+// 返回的数据结构响应参数
+type IpAddr struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 数据端口
+	Dport string `protobuf:"bytes,1,opt,name=dport,proto3" json:"dport,omitempty"`
+	// 文件端口
+	Fport string `protobuf:"bytes,2,opt,name=fport,proto3" json:"fport,omitempty"`
+	// ip或者域名
+	Ip string `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
+	// 是否本地化部署
+	Islocal string `protobuf:"bytes,4,opt,name=islocal,proto3" json:"islocal,omitempty"`
+	// 是否OSS保存文件
+	Isoss string `protobuf:"bytes,5,opt,name=isoss,proto3" json:"isoss,omitempty"`
+}
+
+func (x *IpAddr) Reset() {
+	*x = IpAddr{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cliflags_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IpAddr) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IpAddr) ProtoMessage() {}
+
+func (x *IpAddr) ProtoReflect() protoreflect.Message {
+	mi := &file_cliflags_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IpAddr.ProtoReflect.Descriptor instead.
+func (*IpAddr) Descriptor() ([]byte, []int) {
+	return file_cliflags_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *IpAddr) GetDport() string {
+	if x != nil {
+		return x.Dport
+	}
+	return ""
+}
+
+func (x *IpAddr) GetFport() string {
+	if x != nil {
+		return x.Fport
+	}
+	return ""
+}
+
+func (x *IpAddr) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *IpAddr) GetIslocal() string {
+	if x != nil {
+		return x.Islocal
+	}
+	return ""
+}
+
+func (x *IpAddr) GetIsoss() string {
+	if x != nil {
+		return x.Isoss
+	}
+	return ""
+}
+
+// 获取平台服务器的ip或者域名的响应参数
+type ServerIpReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 错误码
+	Code int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	// ip域名参数
+	Ipaddr *IpAddr `protobuf:"bytes,2,opt,name=ipaddr,proto3" json:"ipaddr,omitempty"`
+}
+
+func (x *ServerIpReply) Reset() {
+	*x = ServerIpReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cliflags_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ServerIpReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServerIpReply) ProtoMessage() {}
+
+func (x *ServerIpReply) ProtoReflect() protoreflect.Message {
+	mi := &file_cliflags_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServerIpReply.ProtoReflect.Descriptor instead.
+func (*ServerIpReply) Descriptor() ([]byte, []int) {
+	return file_cliflags_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ServerIpReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ServerIpReply) GetIpaddr() *IpAddr {
+	if x != nil {
+		return x.Ipaddr
+	}
+	return nil
+}
+
 var File_cliflags_proto protoreflect.FileDescriptor
 
 var file_cliflags_proto_rawDesc = []byte{
@@ -245,8 +388,20 @@ var file_cliflags_proto_rawDesc = []byte{
 	0x12, 0x47, 0x65, 0x74, 0x43, 0x6c, 0x69, 0x55, 0x70, 0x46, 0x6c, 0x61, 0x67, 0x73, 0x52, 0x65,
 	0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x75, 0x70, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x05, 0x52, 0x02, 0x75, 0x70, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x05, 0x52, 0x02, 0x75, 0x70, 0x22, 0x74, 0x0a, 0x06, 0x49, 0x70, 0x41, 0x64, 0x64,
+	0x72, 0x12, 0x14, 0x0a, 0x05, 0x64, 0x70, 0x6f, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x64, 0x70, 0x6f, 0x72, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x70, 0x6f, 0x72, 0x74,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x66, 0x70, 0x6f, 0x72, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x18, 0x0a,
+	0x07, 0x69, 0x73, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x69, 0x73, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x73, 0x6f, 0x73, 0x73,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x73, 0x6f, 0x73, 0x73, 0x22, 0x44, 0x0a,
+	0x0d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x49, 0x70, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12,
+	0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x63, 0x6f,
+	0x64, 0x65, 0x12, 0x1f, 0x0a, 0x06, 0x69, 0x70, 0x61, 0x64, 0x64, 0x72, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x07, 0x2e, 0x49, 0x70, 0x41, 0x64, 0x64, 0x72, 0x52, 0x06, 0x69, 0x70, 0x61,
+	0x64, 0x64, 0x72, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -261,20 +416,23 @@ func file_cliflags_proto_rawDescGZIP() []byte {
 	return file_cliflags_proto_rawDescData
 }
 
-var file_cliflags_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_cliflags_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_cliflags_proto_goTypes = []interface{}{
 	(*GetCliFlagsRequest)(nil),  // 0: GetCliFlagsRequest
 	(*GetCliLogFlagsReply)(nil), // 1: GetCliLogFlagsReply
 	(*GetCliUpFlagsReply)(nil),  // 2: GetCliUpFlagsReply
-	nil,                         // 3: GetCliLogFlagsReply.LogEntry
+	(*IpAddr)(nil),              // 3: IpAddr
+	(*ServerIpReply)(nil),       // 4: ServerIpReply
+	nil,                         // 5: GetCliLogFlagsReply.LogEntry
 }
 var file_cliflags_proto_depIdxs = []int32{
-	3, // 0: GetCliLogFlagsReply.log:type_name -> GetCliLogFlagsReply.LogEntry
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: GetCliLogFlagsReply.log:type_name -> GetCliLogFlagsReply.LogEntry
+	3, // 1: ServerIpReply.ipaddr:type_name -> IpAddr
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cliflags_proto_init() }
@@ -319,6 +477,30 @@ func file_cliflags_proto_init() {
 				return nil
 			}
 		}
+		file_cliflags_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IpAddr); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cliflags_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ServerIpReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -326,7 +508,7 @@ func file_cliflags_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cliflags_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
