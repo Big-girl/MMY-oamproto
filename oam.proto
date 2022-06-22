@@ -118,6 +118,12 @@ service OAMServer{
             body:"*"
         };
     }
-    // 获取租户所属平台的域名、OSS地址
+    // 获取租户所属平台的域名
+    rpc GetServerIp(GetCliFlagsRequest)returns(ServerIpReply){
+        option (goole.api.http)= {
+            post:"/oam/getip"
+            body:"*"
+        };
+    }
 }
 
