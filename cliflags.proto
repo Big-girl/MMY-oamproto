@@ -42,9 +42,9 @@ message IpAddr{
     // ip或者域名
     string ip = 3;
     // 是否本地化部署
-    string islocal = 4;
+    int32 islocal = 4;
     // 是否OSS保存文件
-    string isoss = 5;
+    int32 isoss = 5;
 }
 
 // 获取平台服务器的ip或者域名的响应参数
