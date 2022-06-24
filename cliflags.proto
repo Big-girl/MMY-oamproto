@@ -32,25 +32,3 @@ message GetCliUpFlagsReply{
     // 默认允许升级(0禁止,1允许)
     int32 up = 2;
 }
-
-// 返回的数据结构响应参数
-message IpAddr{
-    // 数据端口
-    string dport = 1;
-    // 文件端口
-    string fport = 2;
-    // ip或者域名
-    string ip = 3;
-    // 是否本地化部署
-    int32 islocal = 4;
-    // 是否OSS保存文件
-    int32 isoss = 5;
-}
-
-// 获取平台服务器的ip或者域名的响应参数
-message ServerIpReply {
-    // 错误码
-    int32 code = 1;
-    // ip域名参数
-    IpAddr ipaddr = 2;
-}

@@ -19,7 +19,7 @@ message OAMTenantAccept{
     // 租户ID
     string id = 1;
     // 平台id
-    int32 platid = 2;
+    int64 platid = 2;
     // 租户状态
     bool status = 3;
     // 租户创建时间

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+// 获取客户标志的请求参数
+message GetPlatRequest{
+    // 每个接口都需要的校验参数
+    // 租户ID
+    string ti = 1;
+    // 客户端ID
+    string ci = 2;
+    // 密码
+    string tag = 3;
+    // 时间戳
+    string t = 4;
+}
+
+// 返回的数据结构响应参数
+message IpAddr{
+    // 数据端口
+    string dport = 1;
+    // 文件端口
+    string fport = 2;
+    // ip或者域名
+    string ip = 3;
+    // 是否本地化部署
+    int32 islocal = 4;
+    // 是否OSS保存文件
+    int32 isoss = 5;
+}
+
+// 获取平台服务器的ip或者域名的响应参数
+message GetServerIpReply {
+    // 错误码
+    int32 code = 1;
+    // ip域名参数
+    IpAddr ipaddr = 2;
+}

@@ -119,7 +119,7 @@ service OAMServer{
         };
     }
     // 获取租户所属平台的域名
-    rpc GetServerIp(GetCliFlagsRequest)returns(ServerIpReply){
+    rpc GetServerIp(GetPlatRequest)returns(GetServerIpReply){
         option (google.api.http)= {
             post:"/oam/getip"
             body:"*"
