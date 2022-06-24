@@ -1,18 +1,12 @@
 syntax = "proto3";
 
 option go_package = ".;proto";
+import "client.proto";
 
 // 获取客户标志的请求参数
 message GetPlatRequest{
     // 每个接口都需要的校验参数
-    // 租户ID
-    string ti = 1;
-    // 客户端ID
-    string ci = 2;
-    // 密码
-    string tag = 3;
-    // 时间戳
-    string t = 4;
+    CheckObj co = 1;
 }
 
 // 返回的数据结构响应参数
