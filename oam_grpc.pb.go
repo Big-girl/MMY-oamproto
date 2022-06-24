@@ -53,7 +53,7 @@ type OAMServerClient interface {
 	// 接受客户端信息从租户
 	AcceptTenantList(ctx context.Context, in *AcceptTenantListRequest, opts ...grpc.CallOption) (*AcceptTenantListReply, error)
 	// 获取租户所属平台的域名
-	GetServerIp(ctx context.Context, in *GetCliFlagsRequest, opts ...grpc.CallOption) (*ServerIpReply, error)
+	GetServerIp(ctx context.Context, in *GetPlatRequest, opts ...grpc.CallOption) (*GetServerIpReply, error)
 }
 
 type oAMServerClient struct {
@@ -199,8 +199,8 @@ func (c *oAMServerClient) AcceptTenantList(ctx context.Context, in *AcceptTenant
 	return out, nil
 }
 
-func (c *oAMServerClient) GetServerIp(ctx context.Context, in *GetCliFlagsRequest, opts ...grpc.CallOption) (*ServerIpReply, error) {
-	out := new(ServerIpReply)
+func (c *oAMServerClient) GetServerIp(ctx context.Context, in *GetPlatRequest, opts ...grpc.CallOption) (*GetServerIpReply, error) {
+	out := new(GetServerIpReply)
 	err := c.cc.Invoke(ctx, "/OAMServer/GetServerIp", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -243,7 +243,7 @@ type OAMServerServer interface {
 	// 接受客户端信息从租户
 	AcceptTenantList(context.Context, *AcceptTenantListRequest) (*AcceptTenantListReply, error)
 	// 获取租户所属平台的域名
-	GetServerIp(context.Context, *GetCliFlagsRequest) (*ServerIpReply, error)
+	GetServerIp(context.Context, *GetPlatRequest) (*GetServerIpReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -295,7 +295,7 @@ func (UnimplementedOAMServerServer) ListModelVersion(context.Context, *ModelVers
 func (UnimplementedOAMServerServer) AcceptTenantList(context.Context, *AcceptTenantListRequest) (*AcceptTenantListReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptTenantList not implemented")
 }
-func (UnimplementedOAMServerServer) GetServerIp(context.Context, *GetCliFlagsRequest) (*ServerIpReply, error) {
+func (UnimplementedOAMServerServer) GetServerIp(context.Context, *GetPlatRequest) (*GetServerIpReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerIp not implemented")
 }
 
@@ -581,7 +581,7 @@ func _OAMServer_AcceptTenantList_Handler(srv interface{}, ctx context.Context, d
 }
 
 func _OAMServer_GetServerIp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCliFlagsRequest)
+	in := new(GetPlatRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -593,7 +593,7 @@ func _OAMServer_GetServerIp_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/OAMServer/GetServerIp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OAMServerServer).GetServerIp(ctx, req.(*GetCliFlagsRequest))
+		return srv.(OAMServerServer).GetServerIp(ctx, req.(*GetPlatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
