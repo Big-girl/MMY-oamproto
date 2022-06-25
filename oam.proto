@@ -126,5 +126,34 @@ service OAMServer{
             body:"*"
         };
     }
+
+    // 创建平台账号
+    rpc AddPlatAccount(AddPlatRequest)returns(PlatReply){
+        option (google.api.http)= {
+            post:"/oam/add/plat"
+            body:"*"
+        };
+    }
+    // 添加平台授权
+    rpc AddPlatLicense(AddPlatLicenseRequest)returns(PlatReply){
+        option (google.api.http)= {
+            post:"/oam/add/platlicense"
+            body:"*"
+        };
+    }
+    // 发送激活验证码
+    rpc SendActiveCode(ActivePlatInfoRequest)returns(PlatReply){
+        option (google.api.http)= {
+            post:"/oam/sendcode"
+            body:"*"
+        };
+    }
+    // 激活平台
+    rpc ActivePlatInfo(ActivePlatInfoRequest)returns(ActivePlatInfoReply){
+        option (google.api.http)= {
+            post:"/oam/activation"
+            body:"*"
+        };
+    }
 }
 

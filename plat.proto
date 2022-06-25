@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = ".;proto";
 import "client.proto";
 
-// 获取客户标志的请求参数
+// 获取平台域名的请求参数
 message GetPlatRequest{
     // 每个接口都需要的校验参数
     CheckObj co = 1;
@@ -29,4 +29,56 @@ message GetServerIpReply {
     int32 code = 1;
     // ip域名参数
     IpAddr ipaddr = 2;
+}
+
+// 创建平台账号的请求参数
+message AddPlatRequest{
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 平台名称
+    string platname = 2;
+    // 联系人
+    string name = 3;
+    // 手机号
+    string phone = 4;
+    // 平台域名
+    string ip = 5;
+}
+
+// 平台账号的响应
+message PlatReply {
+    // 错误码
+    int32 code = 1;
+    // 提示信息
+    string message = 2;
+    // 影响行数
+    int64 affectedrows = 3;  
+}
+
+// 创建平台授权的请求参数
+message AddPlatLicenseRequest{
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 平台id
+    int64 platid = 2;
+    // 授权类型
+    int32 type = 3;
+    // 授权数量
+    int64 count = 4;
+}
+
+// 发送激活码和激活平台信息请求
+message ActivePlatInfoRequest {
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 传输的激活数据
+    string data = 2;
+}
+
+// 激活平台返回的数据
+message ActivePlatInfoReply {
+    // 错误码
+    int32 code = 1;
+    // 返回的激活数据
+    string data = 2;
 }

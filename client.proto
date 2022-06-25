@@ -92,7 +92,7 @@ message AcceptClientListReply{
     // 提示信息
     string message = 2;
     // 影响行数
-    int64 affectedrows = 3;        
+    int64 affectedrows = 3;
 }
 
 // 获取客户端列表的请求参数
