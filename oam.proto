@@ -155,5 +155,19 @@ service OAMServer{
             body:"*"
         };
     }
+    // 获取平台信息
+    rpc GetPlatInfo(GetPlatInfoRequest)returns(GetPlatInfoReply){
+        option (google.api.http)= {
+            post:"/oam/get/platinfo"
+            body:"*"
+        };
+    }
+    // 获取平台授权信息
+    rpc GetPlatLicenseInfo(GetPlatLicenseInfoRequest)returns(GetPlatLicenseInfoReply){
+        option (google.api.http)= {
+            post:"/oam/get/platlicenseinfo"
+            body:"*"
+        };
+    }
 }
 
