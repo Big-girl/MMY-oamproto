@@ -62,6 +62,10 @@ type OAMServerClient interface {
 	SendActiveCode(ctx context.Context, in *ActivePlatInfoRequest, opts ...grpc.CallOption) (*PlatReply, error)
 	// 激活平台
 	ActivePlatInfo(ctx context.Context, in *ActivePlatInfoRequest, opts ...grpc.CallOption) (*ActivePlatInfoReply, error)
+	// 获取平台信息
+	GetPlatInfo(ctx context.Context, in *GetPlatInfoRequest, opts ...grpc.CallOption) (*GetPlatInfoReply, error)
+	// 获取平台授权信息
+	GetPlatLicenseInfo(ctx context.Context, in *GetPlatLicenseInfoRequest, opts ...grpc.CallOption) (*GetPlatLicenseInfoReply, error)
 }
 
 type oAMServerClient struct {
@@ -252,6 +256,24 @@ func (c *oAMServerClient) ActivePlatInfo(ctx context.Context, in *ActivePlatInfo
 	return out, nil
 }
 
+func (c *oAMServerClient) GetPlatInfo(ctx context.Context, in *GetPlatInfoRequest, opts ...grpc.CallOption) (*GetPlatInfoReply, error) {
+	out := new(GetPlatInfoReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/GetPlatInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) GetPlatLicenseInfo(ctx context.Context, in *GetPlatLicenseInfoRequest, opts ...grpc.CallOption) (*GetPlatLicenseInfoReply, error) {
+	out := new(GetPlatLicenseInfoReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/GetPlatLicenseInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -296,6 +318,10 @@ type OAMServerServer interface {
 	SendActiveCode(context.Context, *ActivePlatInfoRequest) (*PlatReply, error)
 	// 激活平台
 	ActivePlatInfo(context.Context, *ActivePlatInfoRequest) (*ActivePlatInfoReply, error)
+	// 获取平台信息
+	GetPlatInfo(context.Context, *GetPlatInfoRequest) (*GetPlatInfoReply, error)
+	// 获取平台授权信息
+	GetPlatLicenseInfo(context.Context, *GetPlatLicenseInfoRequest) (*GetPlatLicenseInfoReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -361,6 +387,12 @@ func (UnimplementedOAMServerServer) SendActiveCode(context.Context, *ActivePlatI
 }
 func (UnimplementedOAMServerServer) ActivePlatInfo(context.Context, *ActivePlatInfoRequest) (*ActivePlatInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivePlatInfo not implemented")
+}
+func (UnimplementedOAMServerServer) GetPlatInfo(context.Context, *GetPlatInfoRequest) (*GetPlatInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlatInfo not implemented")
+}
+func (UnimplementedOAMServerServer) GetPlatLicenseInfo(context.Context, *GetPlatLicenseInfoRequest) (*GetPlatLicenseInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlatLicenseInfo not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -734,6 +766,42 @@ func _OAMServer_ActivePlatInfo_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_GetPlatInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlatInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).GetPlatInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/GetPlatInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).GetPlatInfo(ctx, req.(*GetPlatInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_GetPlatLicenseInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlatLicenseInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).GetPlatLicenseInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/GetPlatLicenseInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).GetPlatLicenseInfo(ctx, req.(*GetPlatLicenseInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -820,6 +888,14 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ActivePlatInfo",
 			Handler:    _OAMServer_ActivePlatInfo_Handler,
+		},
+		{
+			MethodName: "GetPlatInfo",
+			Handler:    _OAMServer_GetPlatInfo_Handler,
+		},
+		{
+			MethodName: "GetPlatLicenseInfo",
+			Handler:    _OAMServer_GetPlatLicenseInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
