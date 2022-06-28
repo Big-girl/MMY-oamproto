@@ -60,7 +60,7 @@ message AddPlatLicenseRequest{
     // 每个接口都需要的校验参数
     CheckObj co = 1;
     // 平台id
-    int64 platid = 2;
+    string platid = 2;
     // 授权类型
     int32 type = 3;
     // 授权数量
