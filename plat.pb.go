@@ -788,6 +788,238 @@ func (x *GetPlatLicenseInfoReply) GetData() string {
 	return ""
 }
 
+// 获取平台信息,用于平台信息更新与同步
+type UpdatePlatInfoRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 每个接口都需要的校验参数
+	Co *CheckObj `protobuf:"bytes,1,opt,name=co,proto3" json:"co,omitempty"`
+	// 平台id、手机号加密数据
+	Data string `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *UpdatePlatInfoRequest) Reset() {
+	*x = UpdatePlatInfoRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlatInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlatInfoRequest) ProtoMessage() {}
+
+func (x *UpdatePlatInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlatInfoRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePlatInfoRequest) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UpdatePlatInfoRequest) GetCo() *CheckObj {
+	if x != nil {
+		return x.Co
+	}
+	return nil
+}
+
+func (x *UpdatePlatInfoRequest) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+// 获取平台信息的响应数据
+type UpdatePlatInfoReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 错误码
+	Code int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	// 返回加密的平台数据
+	Data string `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *UpdatePlatInfoReply) Reset() {
+	*x = UpdatePlatInfoReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlatInfoReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlatInfoReply) ProtoMessage() {}
+
+func (x *UpdatePlatInfoReply) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlatInfoReply.ProtoReflect.Descriptor instead.
+func (*UpdatePlatInfoReply) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UpdatePlatInfoReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdatePlatInfoReply) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+// 获取平台信息,用于平台信息更新与同步
+type UpdatePlatLicenseInfoRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 每个接口都需要的校验参数
+	Co *CheckObj `protobuf:"bytes,1,opt,name=co,proto3" json:"co,omitempty"`
+	// 平台id、平台授权id加密数据
+	Data string `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *UpdatePlatLicenseInfoRequest) Reset() {
+	*x = UpdatePlatLicenseInfoRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlatLicenseInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlatLicenseInfoRequest) ProtoMessage() {}
+
+func (x *UpdatePlatLicenseInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlatLicenseInfoRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePlatLicenseInfoRequest) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *UpdatePlatLicenseInfoRequest) GetCo() *CheckObj {
+	if x != nil {
+		return x.Co
+	}
+	return nil
+}
+
+func (x *UpdatePlatLicenseInfoRequest) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+// 获取平台信息的响应数据
+type UpdatePlatLicenseInfoReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 错误码
+	Code int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	// 返回加密的平台授权信息
+	Data string `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *UpdatePlatLicenseInfoReply) Reset() {
+	*x = UpdatePlatLicenseInfoReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlatLicenseInfoReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlatLicenseInfoReply) ProtoMessage() {}
+
+func (x *UpdatePlatLicenseInfoReply) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlatLicenseInfoReply.ProtoReflect.Descriptor instead.
+func (*UpdatePlatLicenseInfoReply) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *UpdatePlatLicenseInfoReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *UpdatePlatLicenseInfoReply) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
 var File_plat_proto protoreflect.FileDescriptor
 
 var file_plat_proto_rawDesc = []byte{
@@ -854,8 +1086,26 @@ var file_plat_proto_rawDesc = []byte{
 	0x63, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12,
 	0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x63, 0x6f,
 	0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x46, 0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x50, 0x6c, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x19, 0x0a, 0x02, 0x63, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x4f, 0x62, 0x6a, 0x52, 0x02, 0x63, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3d,
+	0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x4d, 0x0a,
+	0x1c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65, 0x6e,
+	0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a,
+	0x02, 0x63, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x43, 0x68, 0x65, 0x63,
+	0x6b, 0x4f, 0x62, 0x6a, 0x52, 0x02, 0x63, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x44, 0x0a, 0x1a,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65, 0x6e, 0x73,
+	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f,
+	0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -870,35 +1120,41 @@ func file_plat_proto_rawDescGZIP() []byte {
 	return file_plat_proto_rawDescData
 }
 
-var file_plat_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plat_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_plat_proto_goTypes = []interface{}{
-	(*GetPlatRequest)(nil),            // 0: GetPlatRequest
-	(*IpAddr)(nil),                    // 1: IpAddr
-	(*GetServerIpReply)(nil),          // 2: GetServerIpReply
-	(*AddPlatRequest)(nil),            // 3: AddPlatRequest
-	(*PlatReply)(nil),                 // 4: PlatReply
-	(*AddPlatLicenseRequest)(nil),     // 5: AddPlatLicenseRequest
-	(*ActivePlatInfoRequest)(nil),     // 6: ActivePlatInfoRequest
-	(*ActivePlatInfoReply)(nil),       // 7: ActivePlatInfoReply
-	(*GetPlatInfoRequest)(nil),        // 8: GetPlatInfoRequest
-	(*GetPlatInfoReply)(nil),          // 9: GetPlatInfoReply
-	(*GetPlatLicenseInfoRequest)(nil), // 10: GetPlatLicenseInfoRequest
-	(*GetPlatLicenseInfoReply)(nil),   // 11: GetPlatLicenseInfoReply
-	(*CheckObj)(nil),                  // 12: CheckObj
+	(*GetPlatRequest)(nil),               // 0: GetPlatRequest
+	(*IpAddr)(nil),                       // 1: IpAddr
+	(*GetServerIpReply)(nil),             // 2: GetServerIpReply
+	(*AddPlatRequest)(nil),               // 3: AddPlatRequest
+	(*PlatReply)(nil),                    // 4: PlatReply
+	(*AddPlatLicenseRequest)(nil),        // 5: AddPlatLicenseRequest
+	(*ActivePlatInfoRequest)(nil),        // 6: ActivePlatInfoRequest
+	(*ActivePlatInfoReply)(nil),          // 7: ActivePlatInfoReply
+	(*GetPlatInfoRequest)(nil),           // 8: GetPlatInfoRequest
+	(*GetPlatInfoReply)(nil),             // 9: GetPlatInfoReply
+	(*GetPlatLicenseInfoRequest)(nil),    // 10: GetPlatLicenseInfoRequest
+	(*GetPlatLicenseInfoReply)(nil),      // 11: GetPlatLicenseInfoReply
+	(*UpdatePlatInfoRequest)(nil),        // 12: UpdatePlatInfoRequest
+	(*UpdatePlatInfoReply)(nil),          // 13: UpdatePlatInfoReply
+	(*UpdatePlatLicenseInfoRequest)(nil), // 14: UpdatePlatLicenseInfoRequest
+	(*UpdatePlatLicenseInfoReply)(nil),   // 15: UpdatePlatLicenseInfoReply
+	(*CheckObj)(nil),                     // 16: CheckObj
 }
 var file_plat_proto_depIdxs = []int32{
-	12, // 0: GetPlatRequest.co:type_name -> CheckObj
+	16, // 0: GetPlatRequest.co:type_name -> CheckObj
 	1,  // 1: GetServerIpReply.ipaddr:type_name -> IpAddr
-	12, // 2: AddPlatRequest.co:type_name -> CheckObj
-	12, // 3: AddPlatLicenseRequest.co:type_name -> CheckObj
-	12, // 4: ActivePlatInfoRequest.co:type_name -> CheckObj
-	12, // 5: GetPlatInfoRequest.co:type_name -> CheckObj
-	12, // 6: GetPlatLicenseInfoRequest.co:type_name -> CheckObj
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	16, // 2: AddPlatRequest.co:type_name -> CheckObj
+	16, // 3: AddPlatLicenseRequest.co:type_name -> CheckObj
+	16, // 4: ActivePlatInfoRequest.co:type_name -> CheckObj
+	16, // 5: GetPlatInfoRequest.co:type_name -> CheckObj
+	16, // 6: GetPlatLicenseInfoRequest.co:type_name -> CheckObj
+	16, // 7: UpdatePlatInfoRequest.co:type_name -> CheckObj
+	16, // 8: UpdatePlatLicenseInfoRequest.co:type_name -> CheckObj
+	9,  // [9:9] is the sub-list for method output_type
+	9,  // [9:9] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_plat_proto_init() }
@@ -1052,6 +1308,54 @@ func file_plat_proto_init() {
 				return nil
 			}
 		}
+		file_plat_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlatInfoRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plat_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlatInfoReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plat_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlatLicenseInfoRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plat_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlatLicenseInfoReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1059,7 +1363,7 @@ func file_plat_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plat_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

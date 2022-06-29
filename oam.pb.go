@@ -32,7 +32,7 @@ var file_oam_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x12, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x76, 0x65, 0x72, 0x73, 0x69,
 	0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0a, 0x70, 0x6c, 0x61, 0x74, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x32, 0xb8, 0x0e, 0x0a, 0x09, 0x4f, 0x41, 0x4d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x74, 0x6f, 0x32, 0x96, 0x10, 0x0a, 0x09, 0x4f, 0x41, 0x4d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
 	0x12, 0x26, 0x0a, 0x04, 0x50, 0x69, 0x6e, 0x67, 0x12, 0x05, 0x2e, 0x50, 0x6f, 0x6e, 0x67, 0x1a,
 	0x05, 0x2e, 0x50, 0x6f, 0x6e, 0x67, 0x22, 0x10, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0a, 0x22, 0x05,
 	0x2f, 0x70, 0x69, 0x6e, 0x67, 0x3a, 0x01, 0x2a, 0x12, 0x59, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x43,
@@ -147,8 +147,22 @@ var file_oam_proto_rawDesc = []byte{
 	0x2e, 0x47, 0x65, 0x74, 0x50, 0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x49,
 	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d,
 	0x22, 0x18, 0x2f, 0x6f, 0x61, 0x6d, 0x2f, 0x67, 0x65, 0x74, 0x2f, 0x70, 0x6c, 0x61, 0x74, 0x6c,
-	0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x69, 0x6e, 0x66, 0x6f, 0x3a, 0x01, 0x2a, 0x42, 0x09, 0x5a,
-	0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x69, 0x6e, 0x66, 0x6f, 0x3a, 0x01, 0x2a, 0x12, 0x5f, 0x0a,
+	0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x12,
+	0x16, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x50, 0x6c, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x19, 0x22, 0x14, 0x2f, 0x6f, 0x61, 0x6d, 0x2f, 0x75, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x2f, 0x70, 0x6c, 0x61, 0x74, 0x69, 0x6e, 0x66, 0x6f, 0x3a, 0x01, 0x2a, 0x12, 0x7b,
+	0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65,
+	0x6e, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1d, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x50, 0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50,
+	0x6c, 0x61, 0x74, 0x4c, 0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x26, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20, 0x22, 0x1b, 0x2f, 0x6f, 0x61,
+	0x6d, 0x2f, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x70, 0x6c, 0x61, 0x74, 0x6c, 0x69, 0x63,
+	0x65, 0x6e, 0x73, 0x65, 0x69, 0x6e, 0x66, 0x6f, 0x3a, 0x01, 0x2a, 0x42, 0x09, 0x5a, 0x07, 0x2e,
+	0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_oam_proto_goTypes = []interface{}{
@@ -169,21 +183,25 @@ var file_oam_proto_goTypes = []interface{}{
 	(*ActivePlatInfoRequest)(nil),         // 14: ActivePlatInfoRequest
 	(*GetPlatInfoRequest)(nil),            // 15: GetPlatInfoRequest
 	(*GetPlatLicenseInfoRequest)(nil),     // 16: GetPlatLicenseInfoRequest
-	(*GetCliLogFlagsReply)(nil),           // 17: GetCliLogFlagsReply
-	(*GetCliUpFlagsReply)(nil),            // 18: GetCliUpFlagsReply
-	(*AcceptClientListReply)(nil),         // 19: AcceptClientListReply
-	(*ListClientReply)(nil),               // 20: ListClientReply
-	(*OAMClient)(nil),                     // 21: OAMClient
-	(*UpdateClientReply)(nil),             // 22: UpdateClientReply
-	(*ListPolicyReply)(nil),               // 23: ListPolicyReply
-	(*OperateReply)(nil),                  // 24: OperateReply
-	(*GetPolicyReply)(nil),                // 25: GetPolicyReply
-	(*AcceptTenantListReply)(nil),         // 26: AcceptTenantListReply
-	(*GetServerIpReply)(nil),              // 27: GetServerIpReply
-	(*PlatReply)(nil),                     // 28: PlatReply
-	(*ActivePlatInfoReply)(nil),           // 29: ActivePlatInfoReply
-	(*GetPlatInfoReply)(nil),              // 30: GetPlatInfoReply
-	(*GetPlatLicenseInfoReply)(nil),       // 31: GetPlatLicenseInfoReply
+	(*UpdatePlatInfoRequest)(nil),         // 17: UpdatePlatInfoRequest
+	(*UpdatePlatLicenseInfoRequest)(nil),  // 18: UpdatePlatLicenseInfoRequest
+	(*GetCliLogFlagsReply)(nil),           // 19: GetCliLogFlagsReply
+	(*GetCliUpFlagsReply)(nil),            // 20: GetCliUpFlagsReply
+	(*AcceptClientListReply)(nil),         // 21: AcceptClientListReply
+	(*ListClientReply)(nil),               // 22: ListClientReply
+	(*OAMClient)(nil),                     // 23: OAMClient
+	(*UpdateClientReply)(nil),             // 24: UpdateClientReply
+	(*ListPolicyReply)(nil),               // 25: ListPolicyReply
+	(*OperateReply)(nil),                  // 26: OperateReply
+	(*GetPolicyReply)(nil),                // 27: GetPolicyReply
+	(*AcceptTenantListReply)(nil),         // 28: AcceptTenantListReply
+	(*GetServerIpReply)(nil),              // 29: GetServerIpReply
+	(*PlatReply)(nil),                     // 30: PlatReply
+	(*ActivePlatInfoReply)(nil),           // 31: ActivePlatInfoReply
+	(*GetPlatInfoReply)(nil),              // 32: GetPlatInfoReply
+	(*GetPlatLicenseInfoReply)(nil),       // 33: GetPlatLicenseInfoReply
+	(*UpdatePlatInfoReply)(nil),           // 34: UpdatePlatInfoReply
+	(*UpdatePlatLicenseInfoReply)(nil),    // 35: UpdatePlatLicenseInfoReply
 }
 var file_oam_proto_depIdxs = []int32{
 	0,  // 0: OAMServer.Ping:input_type -> Pong
@@ -208,30 +226,34 @@ var file_oam_proto_depIdxs = []int32{
 	14, // 19: OAMServer.ActivePlatInfo:input_type -> ActivePlatInfoRequest
 	15, // 20: OAMServer.GetPlatInfo:input_type -> GetPlatInfoRequest
 	16, // 21: OAMServer.GetPlatLicenseInfo:input_type -> GetPlatLicenseInfoRequest
-	0,  // 22: OAMServer.Ping:output_type -> Pong
-	17, // 23: OAMServer.GetCliLogFlags:output_type -> GetCliLogFlagsReply
-	18, // 24: OAMServer.GetCliUpFlags:output_type -> GetCliUpFlagsReply
-	19, // 25: OAMServer.AcceptClientList:output_type -> AcceptClientListReply
-	20, // 26: OAMServer.ListClient:output_type -> ListClientReply
-	21, // 27: OAMServer.GetClient:output_type -> OAMClient
-	22, // 28: OAMServer.BatchUpdateClientFlags:output_type -> UpdateClientReply
-	23, // 29: OAMServer.ReleasePolicy:output_type -> ListPolicyReply
-	24, // 30: OAMServer.AddPolicy:output_type -> OperateReply
-	24, // 31: OAMServer.PutPolicy:output_type -> OperateReply
-	24, // 32: OAMServer.DelPolicy:output_type -> OperateReply
-	23, // 33: OAMServer.ListPolicy:output_type -> ListPolicyReply
-	25, // 34: OAMServer.GetPolicy:output_type -> GetPolicyReply
-	9,  // 35: OAMServer.ListModelVersion:output_type -> ModelVersion
-	26, // 36: OAMServer.AcceptTenantList:output_type -> AcceptTenantListReply
-	27, // 37: OAMServer.GetServerIp:output_type -> GetServerIpReply
-	28, // 38: OAMServer.AddPlatAccount:output_type -> PlatReply
-	28, // 39: OAMServer.AddPlatLicense:output_type -> PlatReply
-	28, // 40: OAMServer.SendActiveCode:output_type -> PlatReply
-	29, // 41: OAMServer.ActivePlatInfo:output_type -> ActivePlatInfoReply
-	30, // 42: OAMServer.GetPlatInfo:output_type -> GetPlatInfoReply
-	31, // 43: OAMServer.GetPlatLicenseInfo:output_type -> GetPlatLicenseInfoReply
-	22, // [22:44] is the sub-list for method output_type
-	0,  // [0:22] is the sub-list for method input_type
+	17, // 22: OAMServer.UpdatePlatInfo:input_type -> UpdatePlatInfoRequest
+	18, // 23: OAMServer.UpdatePlatLicenseInfo:input_type -> UpdatePlatLicenseInfoRequest
+	0,  // 24: OAMServer.Ping:output_type -> Pong
+	19, // 25: OAMServer.GetCliLogFlags:output_type -> GetCliLogFlagsReply
+	20, // 26: OAMServer.GetCliUpFlags:output_type -> GetCliUpFlagsReply
+	21, // 27: OAMServer.AcceptClientList:output_type -> AcceptClientListReply
+	22, // 28: OAMServer.ListClient:output_type -> ListClientReply
+	23, // 29: OAMServer.GetClient:output_type -> OAMClient
+	24, // 30: OAMServer.BatchUpdateClientFlags:output_type -> UpdateClientReply
+	25, // 31: OAMServer.ReleasePolicy:output_type -> ListPolicyReply
+	26, // 32: OAMServer.AddPolicy:output_type -> OperateReply
+	26, // 33: OAMServer.PutPolicy:output_type -> OperateReply
+	26, // 34: OAMServer.DelPolicy:output_type -> OperateReply
+	25, // 35: OAMServer.ListPolicy:output_type -> ListPolicyReply
+	27, // 36: OAMServer.GetPolicy:output_type -> GetPolicyReply
+	9,  // 37: OAMServer.ListModelVersion:output_type -> ModelVersion
+	28, // 38: OAMServer.AcceptTenantList:output_type -> AcceptTenantListReply
+	29, // 39: OAMServer.GetServerIp:output_type -> GetServerIpReply
+	30, // 40: OAMServer.AddPlatAccount:output_type -> PlatReply
+	30, // 41: OAMServer.AddPlatLicense:output_type -> PlatReply
+	30, // 42: OAMServer.SendActiveCode:output_type -> PlatReply
+	31, // 43: OAMServer.ActivePlatInfo:output_type -> ActivePlatInfoReply
+	32, // 44: OAMServer.GetPlatInfo:output_type -> GetPlatInfoReply
+	33, // 45: OAMServer.GetPlatLicenseInfo:output_type -> GetPlatLicenseInfoReply
+	34, // 46: OAMServer.UpdatePlatInfo:output_type -> UpdatePlatInfoReply
+	35, // 47: OAMServer.UpdatePlatLicenseInfo:output_type -> UpdatePlatLicenseInfoReply
+	24, // [24:48] is the sub-list for method output_type
+	0,  // [0:24] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
