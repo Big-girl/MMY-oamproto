@@ -114,3 +114,35 @@ message GetPlatLicenseInfoReply {
     // 返回加密的平台授权信息
     string data = 2;
 }
+
+// 获取平台信息,用于平台信息更新与同步
+message UpdatePlatInfoRequest {
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 平台id、手机号加密数据
+    string data = 2;
+}
+
+// 获取平台信息的响应数据
+message UpdatePlatInfoReply {
+    // 错误码
+    int32 code = 1;
+    // 返回加密的平台数据
+    string data = 2;
+}
+
+// 获取平台信息,用于平台信息更新与同步
+message UpdatePlatLicenseInfoRequest {
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 平台id、平台授权id加密数据
+    string data = 2;
+}
+
+// 获取平台信息的响应数据
+message UpdatePlatLicenseInfoReply {
+    // 错误码
+    int32 code = 1;
+    // 返回加密的平台授权信息
+    string data = 2;
+}

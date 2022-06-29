@@ -169,5 +169,19 @@ service OAMServer{
             body:"*"
         };
     }
+    // 更新平台信息
+    rpc UpdatePlatInfo(UpdatePlatInfoRequest)returns(UpdatePlatInfoReply){
+        option (google.api.http)= {
+            post:"/oam/update/platinfo"
+            body:"*"
+        };
+    }
+    // 更新平台授权信息
+    rpc UpdatePlatLicenseInfo(UpdatePlatLicenseInfoRequest)returns(UpdatePlatLicenseInfoReply){
+        option (google.api.http)= {
+            post:"/oam/update/platlicenseinfo"
+            body:"*"
+        };
+    }
 }
 
