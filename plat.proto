@@ -55,16 +55,22 @@ message PlatReply {
     int64 affectedrows = 3;  
 }
 
+// 平台授权结构
+message PlatLicense {
+    // 平台id
+    string platid = 1;
+    // 授权类型
+    int32 type = 2;
+    // 授权数量
+    int64 count = 3;
+}
+
 // 创建平台授权的请求参数
 message AddPlatLicenseRequest{
     // 每个接口都需要的校验参数
     CheckObj co = 1;
-    // 平台id
-    string platid = 2;
-    // 授权类型
-    int32 type = 3;
-    // 授权数量
-    int64 count = 4;
+    // 平台授权列表
+    repeated PlatLicense list = 20;
 }
 
 // 发送激活码和激活平台信息请求
