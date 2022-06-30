@@ -58,6 +58,8 @@ type OAMServerClient interface {
 	AddPlatAccount(ctx context.Context, in *AddPlatRequest, opts ...grpc.CallOption) (*PlatReply, error)
 	// 添加平台授权
 	AddPlatLicense(ctx context.Context, in *AddPlatLicenseRequest, opts ...grpc.CallOption) (*PlatReply, error)
+	// 购买平台授权点数
+	BuyPlatLicenseCount(ctx context.Context, in *BuyPlatLicenseCountRequest, opts ...grpc.CallOption) (*PlatReply, error)
 	// 发送激活验证码
 	SendActiveCode(ctx context.Context, in *ActivePlatInfoRequest, opts ...grpc.CallOption) (*PlatReply, error)
 	// 激活平台
@@ -242,6 +244,15 @@ func (c *oAMServerClient) AddPlatLicense(ctx context.Context, in *AddPlatLicense
 	return out, nil
 }
 
+func (c *oAMServerClient) BuyPlatLicenseCount(ctx context.Context, in *BuyPlatLicenseCountRequest, opts ...grpc.CallOption) (*PlatReply, error) {
+	out := new(PlatReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/BuyPlatLicenseCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oAMServerClient) SendActiveCode(ctx context.Context, in *ActivePlatInfoRequest, opts ...grpc.CallOption) (*PlatReply, error) {
 	out := new(PlatReply)
 	err := c.cc.Invoke(ctx, "/OAMServer/SendActiveCode", in, out, opts...)
@@ -336,6 +347,8 @@ type OAMServerServer interface {
 	AddPlatAccount(context.Context, *AddPlatRequest) (*PlatReply, error)
 	// 添加平台授权
 	AddPlatLicense(context.Context, *AddPlatLicenseRequest) (*PlatReply, error)
+	// 购买平台授权点数
+	BuyPlatLicenseCount(context.Context, *BuyPlatLicenseCountRequest) (*PlatReply, error)
 	// 发送激活验证码
 	SendActiveCode(context.Context, *ActivePlatInfoRequest) (*PlatReply, error)
 	// 激活平台
@@ -407,6 +420,9 @@ func (UnimplementedOAMServerServer) AddPlatAccount(context.Context, *AddPlatRequ
 }
 func (UnimplementedOAMServerServer) AddPlatLicense(context.Context, *AddPlatLicenseRequest) (*PlatReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddPlatLicense not implemented")
+}
+func (UnimplementedOAMServerServer) BuyPlatLicenseCount(context.Context, *BuyPlatLicenseCountRequest) (*PlatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BuyPlatLicenseCount not implemented")
 }
 func (UnimplementedOAMServerServer) SendActiveCode(context.Context, *ActivePlatInfoRequest) (*PlatReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendActiveCode not implemented")
@@ -762,6 +778,24 @@ func _OAMServer_AddPlatLicense_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_BuyPlatLicenseCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyPlatLicenseCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).BuyPlatLicenseCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/BuyPlatLicenseCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).BuyPlatLicenseCount(ctx, req.(*BuyPlatLicenseCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OAMServer_SendActiveCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ActivePlatInfoRequest)
 	if err := dec(in); err != nil {
@@ -948,6 +982,10 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddPlatLicense",
 			Handler:    _OAMServer_AddPlatLicense_Handler,
+		},
+		{
+			MethodName: "BuyPlatLicenseCount",
+			Handler:    _OAMServer_BuyPlatLicenseCount_Handler,
 		},
 		{
 			MethodName: "SendActiveCode",
