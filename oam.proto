@@ -141,6 +141,13 @@ service OAMServer{
             body:"*"
         };
     }
+    // 购买平台授权点数
+    rpc BuyPlatLicenseCount(BuyPlatLicenseCountRequest)returns(PlatReply){
+        option (google.api.http)= {
+            post:"/oam/buy/platlicensecount"
+            body:"*"
+        };
+    }
     // 发送激活验证码
     rpc SendActiveCode(ActivePlatInfoRequest)returns(PlatReply){
         option (google.api.http)= {

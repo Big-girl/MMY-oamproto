@@ -152,3 +152,15 @@ message UpdatePlatLicenseInfoReply {
     // 返回加密的平台授权信息
     string data = 2;
 }
+
+// 给已经存在的平台授权添加点数
+message BuyPlatLicenseCountRequest {
+    // 每个接口都需要的校验参数
+    CheckObj co = 1;
+    // 平台id
+    string platid = 2;
+    // 授权类型
+    int32 type = 3;
+    // 购买的点数
+    int64 count = 4;
+}
