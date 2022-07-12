@@ -49,6 +49,9 @@ message AddPolicyRequest{
     repeated WordLibrary wordlib = 11;
     string apphook = 12;
     string appv = 13;
+    repeated FencClass fencclass = 14;
+    repeated FencApp fencapp = 15;
+    repeated FencProcess fencprocess = 16;
 }
 
 // 修改策略的请求参数
@@ -69,6 +72,9 @@ message PutPolicyRequest{
     WordLibrary wordlib = 11;
     string apphook = 12;
     string appv = 13;
+    FencClass fencclass = 14;
+    FencApp fencapp = 15;
+    FencProcess fencprocess = 16;
 
     // 更新数据的查询条件
     PolicyQuery filter = 21;
@@ -124,6 +130,8 @@ message PolicyQuery{
     string suffix = 40;
     // 数据类型：wordClass
     int32 type = 41;
+     // 应用编码：keys
+    string keys = 42;
 
     // 工具参数
     // 分页参数：当前页数
@@ -151,6 +159,9 @@ message ListPolicyReply{
     repeated WordLibrary wordlib = 30;
     string apphook = 31;
     string appv = 32;
+    repeated FencClass fencclass = 33;
+    repeated FencApp fencapp =34;
+    repeated FencProcess fencprocess = 35;
 }
 
 // 获取单个策略的响应参数
@@ -169,6 +180,9 @@ message GetPolicyReply{
     WordLibrary wordlib = 11;
     string apphook = 12;
     string appv = 13;
+    FencClass fencclass = 14;
+    FencApp FencApp = 15;
+    FencProcess fencprocess = 16;
 }
 
 // 泄漏分析配置
@@ -333,6 +347,59 @@ message WordLibrary {
     int32 classid = 3;
     // 区分是文字的类型还是文件的类型：1：文字；2：文件
     int32 type = 4; 
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
+}
+
+// 文件加密分类
+message FencClass {
+    // 主键ID
+    int32 id = 1;
+    // 关键字分类名称
+    string name = 2; 
+    // 区分是文字的类型还是文件的类型：1：文字；2：文件
+    int32 type = 3; 
+
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
+}
+
+// 文件加密应用
+message FencApp {
+    // 主键ID
+    int32 id = 1;
+    // 应用码
+    string keys = 2; 
+    // 应用名称
+    string name = 3; 
+    // 分类id
+    int32 classid = 4;
+
+    // 最后更新时间
+    int64 uptime = 21;
+    // 操作类型
+    int32 opr = 22;
+}
+
+// 文件加密进程库
+message FencProcess {
+    // 主键ID
+    int32 id = 1;
+    // 应用编码
+    string appkeys = 2; 
+    // 应用名称
+    string appname = 3; 
+    // 进程名称
+    string exename =4;
+    // 加密标识：默认为2(啥意思呀)
+    int32 encryptflag =5;
+    // 文件类型(文件后缀)
+    repeated string filetype =6;
+
     // 最后更新时间
     int64 uptime = 21;
     // 操作类型
