@@ -190,5 +190,12 @@ service OAMServer{
             body:"*"
         };
     }
+    // 获取平台域名
+    rpc GetPlatDomain (GetPlatDomainRequest) returns (GetPlatDomainReply){
+        option (google.api.http)= {
+            post:"/oam/get/platdomain"
+            body:"*"
+        };
+    }
 }
 
