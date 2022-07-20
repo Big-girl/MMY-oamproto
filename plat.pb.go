@@ -1145,6 +1145,122 @@ func (x *BuyPlatLicenseCountRequest) GetCount() int64 {
 	return 0
 }
 
+// 获取平台域名地址的请求
+type GetPlatDomainRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 每个接口都需要的校验参数
+	Co *CheckObj `protobuf:"bytes,1,opt,name=co,proto3" json:"co,omitempty"`
+	// 平台id
+	Platid string `protobuf:"bytes,2,opt,name=platid,proto3" json:"platid,omitempty"`
+}
+
+func (x *GetPlatDomainRequest) Reset() {
+	*x = GetPlatDomainRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPlatDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlatDomainRequest) ProtoMessage() {}
+
+func (x *GetPlatDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlatDomainRequest.ProtoReflect.Descriptor instead.
+func (*GetPlatDomainRequest) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetPlatDomainRequest) GetCo() *CheckObj {
+	if x != nil {
+		return x.Co
+	}
+	return nil
+}
+
+func (x *GetPlatDomainRequest) GetPlatid() string {
+	if x != nil {
+		return x.Platid
+	}
+	return ""
+}
+
+// 返回平台的域名地址
+type GetPlatDomainReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// 错误码
+	Code int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	// 平台的域名地址
+	Domain string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+}
+
+func (x *GetPlatDomainReply) Reset() {
+	*x = GetPlatDomainReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plat_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPlatDomainReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlatDomainReply) ProtoMessage() {}
+
+func (x *GetPlatDomainReply) ProtoReflect() protoreflect.Message {
+	mi := &file_plat_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlatDomainReply.ProtoReflect.Descriptor instead.
+func (*GetPlatDomainReply) Descriptor() ([]byte, []int) {
+	return file_plat_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetPlatDomainReply) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetPlatDomainReply) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
 var File_plat_proto protoreflect.FileDescriptor
 
 var file_plat_proto_rawDesc = []byte{
@@ -1239,9 +1355,17 @@ var file_plat_proto_rawDesc = []byte{
 	0x70, 0x6c, 0x61, 0x74, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6c,
 	0x61, 0x74, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x09,
-	0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x49,
+	0x0a, 0x14, 0x47, 0x65, 0x74, 0x50, 0x6c, 0x61, 0x74, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x02, 0x63, 0x6f, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x09, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x4f, 0x62, 0x6a, 0x52, 0x02, 0x63,
+	0x6f, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x6c, 0x61, 0x74, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x70, 0x6c, 0x61, 0x74, 0x69, 0x64, 0x22, 0x40, 0x0a, 0x12, 0x47, 0x65, 0x74,
+	0x50, 0x6c, 0x61, 0x74, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
+	0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x63,
+	0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x42, 0x09, 0x5a, 0x07, 0x2e,
+	0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1256,7 +1380,7 @@ func file_plat_proto_rawDescGZIP() []byte {
 	return file_plat_proto_rawDescData
 }
 
-var file_plat_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_plat_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_plat_proto_goTypes = []interface{}{
 	(*GetPlatRequest)(nil),               // 0: GetPlatRequest
 	(*IpAddr)(nil),                       // 1: IpAddr
@@ -1276,25 +1400,28 @@ var file_plat_proto_goTypes = []interface{}{
 	(*UpdatePlatLicenseInfoRequest)(nil), // 15: UpdatePlatLicenseInfoRequest
 	(*UpdatePlatLicenseInfoReply)(nil),   // 16: UpdatePlatLicenseInfoReply
 	(*BuyPlatLicenseCountRequest)(nil),   // 17: BuyPlatLicenseCountRequest
-	(*CheckObj)(nil),                     // 18: CheckObj
+	(*GetPlatDomainRequest)(nil),         // 18: GetPlatDomainRequest
+	(*GetPlatDomainReply)(nil),           // 19: GetPlatDomainReply
+	(*CheckObj)(nil),                     // 20: CheckObj
 }
 var file_plat_proto_depIdxs = []int32{
-	18, // 0: GetPlatRequest.co:type_name -> CheckObj
+	20, // 0: GetPlatRequest.co:type_name -> CheckObj
 	1,  // 1: GetServerIpReply.ipaddr:type_name -> IpAddr
-	18, // 2: AddPlatRequest.co:type_name -> CheckObj
-	18, // 3: AddPlatLicenseRequest.co:type_name -> CheckObj
+	20, // 2: AddPlatRequest.co:type_name -> CheckObj
+	20, // 3: AddPlatLicenseRequest.co:type_name -> CheckObj
 	5,  // 4: AddPlatLicenseRequest.list:type_name -> PlatLicense
-	18, // 5: ActivePlatInfoRequest.co:type_name -> CheckObj
-	18, // 6: GetPlatInfoRequest.co:type_name -> CheckObj
-	18, // 7: GetPlatLicenseInfoRequest.co:type_name -> CheckObj
-	18, // 8: UpdatePlatInfoRequest.co:type_name -> CheckObj
-	18, // 9: UpdatePlatLicenseInfoRequest.co:type_name -> CheckObj
-	18, // 10: BuyPlatLicenseCountRequest.co:type_name -> CheckObj
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	20, // 5: ActivePlatInfoRequest.co:type_name -> CheckObj
+	20, // 6: GetPlatInfoRequest.co:type_name -> CheckObj
+	20, // 7: GetPlatLicenseInfoRequest.co:type_name -> CheckObj
+	20, // 8: UpdatePlatInfoRequest.co:type_name -> CheckObj
+	20, // 9: UpdatePlatLicenseInfoRequest.co:type_name -> CheckObj
+	20, // 10: BuyPlatLicenseCountRequest.co:type_name -> CheckObj
+	20, // 11: GetPlatDomainRequest.co:type_name -> CheckObj
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_plat_proto_init() }
@@ -1520,6 +1647,30 @@ func file_plat_proto_init() {
 				return nil
 			}
 		}
+		file_plat_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPlatDomainRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plat_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPlatDomainReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1527,7 +1678,7 @@ func file_plat_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plat_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -72,6 +72,8 @@ type OAMServerClient interface {
 	UpdatePlatInfo(ctx context.Context, in *UpdatePlatInfoRequest, opts ...grpc.CallOption) (*UpdatePlatInfoReply, error)
 	// 更新平台授权信息
 	UpdatePlatLicenseInfo(ctx context.Context, in *UpdatePlatLicenseInfoRequest, opts ...grpc.CallOption) (*UpdatePlatLicenseInfoReply, error)
+	// 获取平台域名
+	GetPlatDomain(ctx context.Context, in *GetPlatDomainRequest, opts ...grpc.CallOption) (*GetPlatDomainReply, error)
 }
 
 type oAMServerClient struct {
@@ -307,6 +309,15 @@ func (c *oAMServerClient) UpdatePlatLicenseInfo(ctx context.Context, in *UpdateP
 	return out, nil
 }
 
+func (c *oAMServerClient) GetPlatDomain(ctx context.Context, in *GetPlatDomainRequest, opts ...grpc.CallOption) (*GetPlatDomainReply, error) {
+	out := new(GetPlatDomainReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/GetPlatDomain", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -361,6 +372,8 @@ type OAMServerServer interface {
 	UpdatePlatInfo(context.Context, *UpdatePlatInfoRequest) (*UpdatePlatInfoReply, error)
 	// 更新平台授权信息
 	UpdatePlatLicenseInfo(context.Context, *UpdatePlatLicenseInfoRequest) (*UpdatePlatLicenseInfoReply, error)
+	// 获取平台域名
+	GetPlatDomain(context.Context, *GetPlatDomainRequest) (*GetPlatDomainReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -441,6 +454,9 @@ func (UnimplementedOAMServerServer) UpdatePlatInfo(context.Context, *UpdatePlatI
 }
 func (UnimplementedOAMServerServer) UpdatePlatLicenseInfo(context.Context, *UpdatePlatLicenseInfoRequest) (*UpdatePlatLicenseInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlatLicenseInfo not implemented")
+}
+func (UnimplementedOAMServerServer) GetPlatDomain(context.Context, *GetPlatDomainRequest) (*GetPlatDomainReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlatDomain not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -904,6 +920,24 @@ func _OAMServer_UpdatePlatLicenseInfo_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_GetPlatDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlatDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).GetPlatDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/GetPlatDomain",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).GetPlatDomain(ctx, req.(*GetPlatDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1010,6 +1044,10 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdatePlatLicenseInfo",
 			Handler:    _OAMServer_UpdatePlatLicenseInfo_Handler,
+		},
+		{
+			MethodName: "GetPlatDomain",
+			Handler:    _OAMServer_GetPlatDomain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
