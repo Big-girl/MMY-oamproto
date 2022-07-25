@@ -77,28 +77,28 @@ service OAMServer{
             body:"*"
         };
     }
-    // 修改
+    // 修改策略
     rpc PutPolicy(PutPolicyRequest)returns(OperateReply){
         option (google.api.http)= {
             post:"/oam/update/policy"
             body:"*"
         };
     }
-    // 删除
+    // 删除策略
     rpc DelPolicy(PolicyQuery)returns(OperateReply){
         option (google.api.http)= {
             post:"/oam/delete/policy"
             body:"*"
         };
     }
-    // 获取列表
+    // 获取策略列表
     rpc ListPolicy(PolicyQuery)returns(ListPolicyReply){
         option (google.api.http)= {
             post:"/oam/list/policy"
             body:"*"
         };
     }
-    // 获取单个
+    // 获取单个策略
     rpc GetPolicy(PolicyQuery)returns(GetPolicyReply){
         option (google.api.http)= {
             post:"/oam/get/policy"
@@ -116,6 +116,13 @@ service OAMServer{
     rpc AcceptTenantList(AcceptTenantListRequest)returns(AcceptTenantListReply){
         option (google.api.http)= {
             post:"/oam/accept/tenants"
+            body:"*"
+        };
+    }
+    // 获取租户列表
+    rpc ListTenant(ListTenantRequest)returns(ListTenantReply){
+        option (google.api.http)= {
+            post:"/oam/list/tenant"
             body:"*"
         };
     }

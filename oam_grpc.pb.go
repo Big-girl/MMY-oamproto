@@ -40,18 +40,20 @@ type OAMServerClient interface {
 	ReleasePolicy(ctx context.Context, in *ReleasePolicyRequest, opts ...grpc.CallOption) (*ListPolicyReply, error)
 	// 新增策略
 	AddPolicy(ctx context.Context, in *AddPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error)
-	// 修改
+	// 修改策略
 	PutPolicy(ctx context.Context, in *PutPolicyRequest, opts ...grpc.CallOption) (*OperateReply, error)
-	// 删除
+	// 删除策略
 	DelPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*OperateReply, error)
-	// 获取列表
+	// 获取策略列表
 	ListPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*ListPolicyReply, error)
-	// 获取单个
+	// 获取单个策略
 	GetPolicy(ctx context.Context, in *PolicyQuery, opts ...grpc.CallOption) (*GetPolicyReply, error)
 	// 获取modelVersion
 	ListModelVersion(ctx context.Context, in *ModelVersion, opts ...grpc.CallOption) (*ModelVersion, error)
 	// 接受客户端信息从租户
 	AcceptTenantList(ctx context.Context, in *AcceptTenantListRequest, opts ...grpc.CallOption) (*AcceptTenantListReply, error)
+	// 获取租户列表
+	ListTenant(ctx context.Context, in *ListTenantRequest, opts ...grpc.CallOption) (*ListTenantReply, error)
 	// 获取租户所属平台的域名
 	GetServerIp(ctx context.Context, in *GetPlatRequest, opts ...grpc.CallOption) (*GetServerIpReply, error)
 	// 创建平台账号
@@ -219,6 +221,15 @@ func (c *oAMServerClient) AcceptTenantList(ctx context.Context, in *AcceptTenant
 	return out, nil
 }
 
+func (c *oAMServerClient) ListTenant(ctx context.Context, in *ListTenantRequest, opts ...grpc.CallOption) (*ListTenantReply, error) {
+	out := new(ListTenantReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/ListTenant", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oAMServerClient) GetServerIp(ctx context.Context, in *GetPlatRequest, opts ...grpc.CallOption) (*GetServerIpReply, error) {
 	out := new(GetServerIpReply)
 	err := c.cc.Invoke(ctx, "/OAMServer/GetServerIp", in, out, opts...)
@@ -340,18 +351,20 @@ type OAMServerServer interface {
 	ReleasePolicy(context.Context, *ReleasePolicyRequest) (*ListPolicyReply, error)
 	// 新增策略
 	AddPolicy(context.Context, *AddPolicyRequest) (*OperateReply, error)
-	// 修改
+	// 修改策略
 	PutPolicy(context.Context, *PutPolicyRequest) (*OperateReply, error)
-	// 删除
+	// 删除策略
 	DelPolicy(context.Context, *PolicyQuery) (*OperateReply, error)
-	// 获取列表
+	// 获取策略列表
 	ListPolicy(context.Context, *PolicyQuery) (*ListPolicyReply, error)
-	// 获取单个
+	// 获取单个策略
 	GetPolicy(context.Context, *PolicyQuery) (*GetPolicyReply, error)
 	// 获取modelVersion
 	ListModelVersion(context.Context, *ModelVersion) (*ModelVersion, error)
 	// 接受客户端信息从租户
 	AcceptTenantList(context.Context, *AcceptTenantListRequest) (*AcceptTenantListReply, error)
+	// 获取租户列表
+	ListTenant(context.Context, *ListTenantRequest) (*ListTenantReply, error)
 	// 获取租户所属平台的域名
 	GetServerIp(context.Context, *GetPlatRequest) (*GetServerIpReply, error)
 	// 创建平台账号
@@ -424,6 +437,9 @@ func (UnimplementedOAMServerServer) ListModelVersion(context.Context, *ModelVers
 }
 func (UnimplementedOAMServerServer) AcceptTenantList(context.Context, *AcceptTenantListRequest) (*AcceptTenantListReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptTenantList not implemented")
+}
+func (UnimplementedOAMServerServer) ListTenant(context.Context, *ListTenantRequest) (*ListTenantReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTenant not implemented")
 }
 func (UnimplementedOAMServerServer) GetServerIp(context.Context, *GetPlatRequest) (*GetServerIpReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerIp not implemented")
@@ -740,6 +756,24 @@ func _OAMServer_AcceptTenantList_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_ListTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ListTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ListTenant",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ListTenant(ctx, req.(*ListTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OAMServer_GetServerIp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPlatRequest)
 	if err := dec(in); err != nil {
@@ -1004,6 +1038,10 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AcceptTenantList",
 			Handler:    _OAMServer_AcceptTenantList_Handler,
+		},
+		{
+			MethodName: "ListTenant",
+			Handler:    _OAMServer_ListTenant_Handler,
 		},
 		{
 			MethodName: "GetServerIp",
