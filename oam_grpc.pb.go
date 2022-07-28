@@ -76,6 +76,14 @@ type OAMServerClient interface {
 	UpdatePlatLicenseInfo(ctx context.Context, in *UpdatePlatLicenseInfoRequest, opts ...grpc.CallOption) (*UpdatePlatLicenseInfoReply, error)
 	// 获取平台域名
 	GetPlatDomain(ctx context.Context, in *GetPlatDomainRequest, opts ...grpc.CallOption) (*GetPlatDomainReply, error)
+	// 获取平台列表(运维平台的接口)
+	ListOamPlat(ctx context.Context, in *ListPlatRequest, opts ...grpc.CallOption) (*ListPlatReply, error)
+	// 获取平台列表(运维平台的接口)
+	GetOamPlat(ctx context.Context, in *ListPlatRequest, opts ...grpc.CallOption) (*GetOamPlatReply, error)
+	// 修改平台信息+授权license
+	UpdatePlatAndLicense(ctx context.Context, in *AddPlatRequest, opts ...grpc.CallOption) (*PlatReply, error)
+	// 获取平台license日志
+	ListLicenseLog(ctx context.Context, in *PlatLicenseLogQuery, opts ...grpc.CallOption) (*ListLicenseLogReply, error)
 }
 
 type oAMServerClient struct {
@@ -329,6 +337,42 @@ func (c *oAMServerClient) GetPlatDomain(ctx context.Context, in *GetPlatDomainRe
 	return out, nil
 }
 
+func (c *oAMServerClient) ListOamPlat(ctx context.Context, in *ListPlatRequest, opts ...grpc.CallOption) (*ListPlatReply, error) {
+	out := new(ListPlatReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/ListOamPlat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) GetOamPlat(ctx context.Context, in *ListPlatRequest, opts ...grpc.CallOption) (*GetOamPlatReply, error) {
+	out := new(GetOamPlatReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/GetOamPlat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) UpdatePlatAndLicense(ctx context.Context, in *AddPlatRequest, opts ...grpc.CallOption) (*PlatReply, error) {
+	out := new(PlatReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/UpdatePlatAndLicense", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAMServerClient) ListLicenseLog(ctx context.Context, in *PlatLicenseLogQuery, opts ...grpc.CallOption) (*ListLicenseLogReply, error) {
+	out := new(ListLicenseLogReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/ListLicenseLog", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -387,6 +431,14 @@ type OAMServerServer interface {
 	UpdatePlatLicenseInfo(context.Context, *UpdatePlatLicenseInfoRequest) (*UpdatePlatLicenseInfoReply, error)
 	// 获取平台域名
 	GetPlatDomain(context.Context, *GetPlatDomainRequest) (*GetPlatDomainReply, error)
+	// 获取平台列表(运维平台的接口)
+	ListOamPlat(context.Context, *ListPlatRequest) (*ListPlatReply, error)
+	// 获取平台列表(运维平台的接口)
+	GetOamPlat(context.Context, *ListPlatRequest) (*GetOamPlatReply, error)
+	// 修改平台信息+授权license
+	UpdatePlatAndLicense(context.Context, *AddPlatRequest) (*PlatReply, error)
+	// 获取平台license日志
+	ListLicenseLog(context.Context, *PlatLicenseLogQuery) (*ListLicenseLogReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -473,6 +525,18 @@ func (UnimplementedOAMServerServer) UpdatePlatLicenseInfo(context.Context, *Upda
 }
 func (UnimplementedOAMServerServer) GetPlatDomain(context.Context, *GetPlatDomainRequest) (*GetPlatDomainReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlatDomain not implemented")
+}
+func (UnimplementedOAMServerServer) ListOamPlat(context.Context, *ListPlatRequest) (*ListPlatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOamPlat not implemented")
+}
+func (UnimplementedOAMServerServer) GetOamPlat(context.Context, *ListPlatRequest) (*GetOamPlatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOamPlat not implemented")
+}
+func (UnimplementedOAMServerServer) UpdatePlatAndLicense(context.Context, *AddPlatRequest) (*PlatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlatAndLicense not implemented")
+}
+func (UnimplementedOAMServerServer) ListLicenseLog(context.Context, *PlatLicenseLogQuery) (*ListLicenseLogReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLicenseLog not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -972,6 +1036,78 @@ func _OAMServer_GetPlatDomain_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_ListOamPlat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPlatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ListOamPlat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ListOamPlat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ListOamPlat(ctx, req.(*ListPlatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_GetOamPlat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPlatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).GetOamPlat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/GetOamPlat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).GetOamPlat(ctx, req.(*ListPlatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_UpdatePlatAndLicense_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPlatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).UpdatePlatAndLicense(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/UpdatePlatAndLicense",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).UpdatePlatAndLicense(ctx, req.(*AddPlatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAMServer_ListLicenseLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlatLicenseLogQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).ListLicenseLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/ListLicenseLog",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).ListLicenseLog(ctx, req.(*PlatLicenseLogQuery))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1086,6 +1222,22 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlatDomain",
 			Handler:    _OAMServer_GetPlatDomain_Handler,
+		},
+		{
+			MethodName: "ListOamPlat",
+			Handler:    _OAMServer_ListOamPlat_Handler,
+		},
+		{
+			MethodName: "GetOamPlat",
+			Handler:    _OAMServer_GetOamPlat_Handler,
+		},
+		{
+			MethodName: "UpdatePlatAndLicense",
+			Handler:    _OAMServer_UpdatePlatAndLicense_Handler,
+		},
+		{
+			MethodName: "ListLicenseLog",
+			Handler:    _OAMServer_ListLicenseLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

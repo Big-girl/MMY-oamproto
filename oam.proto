@@ -17,7 +17,7 @@ service OAMServer{
      // 服务测试接口
      rpc Ping(Pong)returns(Pong){
         option (google.api.http) ={
-            post:"/ping",
+            post:"/oam/ping",
             body:"*"
         };
     }
@@ -201,6 +201,34 @@ service OAMServer{
     rpc GetPlatDomain (GetPlatDomainRequest) returns (GetPlatDomainReply){
         option (google.api.http)= {
             post:"/oam/get/platdomain"
+            body:"*"
+        };
+    }
+    // 获取平台列表(运维平台的接口)
+    rpc ListOamPlat (ListPlatRequest) returns (ListPlatReply){
+        option (google.api.http)= {
+            post:"/oam/list/plat"
+            body:"*"
+        };
+    }
+    // 获取平台列表(运维平台的接口)
+    rpc GetOamPlat (ListPlatRequest) returns (GetOamPlatReply){
+        option (google.api.http)= {
+            post:"/oam/get/plat"
+            body:"*"
+        };
+    }
+     // 修改平台信息+授权license
+     rpc UpdatePlatAndLicense(AddPlatRequest)returns(PlatReply){
+        option (google.api.http)= {
+            post:"/oam/put/plat"
+            body:"*"
+        };
+    }
+    // 获取平台license日志
+    rpc ListLicenseLog (PlatLicenseLogQuery) returns (ListLicenseLogReply){
+        option (google.api.http)= {
+            post:"/oam/list/licenselog"
             body:"*"
         };
     }

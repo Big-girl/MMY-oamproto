@@ -68,6 +68,8 @@ message OAMClient{
     string otherflags = 10;
     // 客户端动态库的版本
     string verdll = 12;
+    // 客户端的在线状态
+    int32 status = 13;
 }
 
 // 客户端信息-各种标记
@@ -115,6 +117,10 @@ message ListClientRequest{
     int64 lasttime =7;
     // 是否卸载：1:是；2:否
     int32 uninstall =8;
+    // 客户端在线状态：1在线，2离线，3异常
+    int32 status =9;
+    // 多个租户id
+    repeated string tenantids = 10;
 
     // 其他参数
     // 分页参数：第几页
@@ -138,6 +144,8 @@ message BatchUpdateClientFlagsRequest{
     repeated string ids =1;
     // 租户ID
     string tenantid = 2;
+    // 多个租户id
+    repeated string tenantids = 3;
     
     // 更新需要修改的东西
     Otherflags obj =10;

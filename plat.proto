@@ -35,14 +35,11 @@ message GetServerIpReply {
 message AddPlatRequest{
     // 每个接口都需要的校验参数
     CheckObj co = 1;
-    // 平台名称
-    string platname = 2;
-    // 联系人
-    string name = 3;
-    // 手机号
-    string phone = 4;
-    // 平台域名
-    string ip = 5;
+
+    // 平台信息
+    PlatInfo plat = 11;
+    // 授权license信息
+    repeated PlatLicenseLog list = 12;
 }
 
 // 平台账号的响应
@@ -63,6 +60,8 @@ message PlatLicense {
     int32 type = 2;
     // 授权数量
     int64 count = 3;
+    // 已使用点数
+    int64 usecount = 4;
 }
 
 // 创建平台授权的请求参数
@@ -179,4 +178,108 @@ message GetPlatDomainReply {
     int32 code = 1;
     // 平台的域名地址
     string domain = 2;
+}
+
+// 平台的基本信息
+message PlatInfo{
+    // 平台id
+    string id = 1;
+    // 平台名称
+    string platname = 2;
+    // 联系人
+    string name = 3;
+    // 手机号
+    string phone = 4;
+    // 平台域名
+    string ip = 5;
+    // 创建时间
+    int64 createtime = 6;
+    // 是否激活
+    bool isactive = 7;
+    // 备注
+    string remark = 8;
+}
+
+// 获取平台列表的请求接口
+message ListPlatRequest{
+    // 校验参数
+    CheckObj co = 1;
+    // 条件：平台/联系人/联系电话
+    string condition = 11;
+    // 平台名称
+    string platname = 12;
+    // 联系人
+    string name = 13;
+    // 手机号
+    string phone = 14;
+    // 创建时间：开始时间
+    int64 start = 15;
+    // 创建时间：结束时间
+    int64 end = 16;
+    // 是否被激活
+    int32 isactive = 17;
+    // 平台id
+    string id = 18;
+
+    // 其他参数
+    // 分页参数：第几页
+    int64 pageindex =20;
+    // 分页参数：几条数据
+    int64 pagelimit =21;
+}
+
+// 获取平台列表的响应参数
+message ListPlatReply{
+    // 数据列表
+    repeated PlatInfo list = 1;
+    // 符合条件的总条数
+    int64 totalcount = 2;
+}
+
+// 获取平台信息详情的响应参数
+message GetOamPlatReply {
+    // 平台信息
+    PlatInfo plat = 1;
+    // 平台对应的license信息
+    repeated PlatLicense list = 2;
+}
+
+// 平台授权操作日志
+message PlatLicenseLog {
+    // 平台id:新增和修改的时候需要填的参数
+    string platid = 1;
+    // 授权类型:新增和修改的时候需要填的参数
+    int32 type = 2;
+    // 追加数量:新增和修改的时候需要填的参数
+    int64 appendcount = 3;
+    // 赠送数量:新增和修改的时候需要填的参数
+    int64 giftcount = 4;
+
+    // 授权总数量
+    int64 count = 11;
+    // 已经使用了的数量
+    int64 usecount = 12;
+    // 从哪里产生的这条操作日志
+    string from = 13;
+    // 操作时间
+    int64 createtime = 14;
+}
+
+// 平台授权操作日志的查询信息
+message PlatLicenseLogQuery {
+    // 校验参数
+    CheckObj co = 1;
+    // 平台id:新增和修改的时候需要填的参数
+    string platid = 11;
+
+    // 其他参数
+    // 分页参数：第几页
+    int64 pageindex =21;
+    // 分页参数：几条数据
+    int64 pagelimit =22;
+}
+
+message ListLicenseLogReply{
+    repeated PlatLicenseLog list = 1;
+    int64 totalcount = 2;
 }

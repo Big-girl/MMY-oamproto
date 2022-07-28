@@ -20,6 +20,10 @@ message OAMTenantAccept{
     string ip = 6;
     // 租户激活标记
     bool isactive = 7;
+
+    // 下面的接口是前端页面需要的额外参数
+    // 租户下面不同状态的客户端数量
+    map<int32,int32> statuscount = 11;
 }
 
 // 接受客户端信息的请求参数
@@ -61,7 +65,7 @@ message ListTenantRequest{
     // 创建时间：结束时间
     int64 cendtime = 8;
 
-     // 其他参数
+    // 其他参数
     // 分页参数：第几页
     int64 pageindex =20;
     // 分页参数：几条数据
@@ -73,5 +77,5 @@ message ListTenantReply{
     // 符合数据的列表数据
     repeated OAMTenantAccept list = 1;
     // 符合条件的数据总数
-    int32 totalcount = 2;
+    int64 totalcount = 2;
 }
