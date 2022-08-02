@@ -84,6 +84,9 @@ type OAMServerClient interface {
 	UpdatePlatAndLicense(ctx context.Context, in *AddPlatRequest, opts ...grpc.CallOption) (*PlatReply, error)
 	// 获取平台license日志
 	ListLicenseLog(ctx context.Context, in *PlatLicenseLogQuery, opts ...grpc.CallOption) (*ListLicenseLogReply, error)
+	// 管理员管理
+	// 登录接口
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
 }
 
 type oAMServerClient struct {
@@ -373,6 +376,15 @@ func (c *oAMServerClient) ListLicenseLog(ctx context.Context, in *PlatLicenseLog
 	return out, nil
 }
 
+func (c *oAMServerClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error) {
+	out := new(LoginReply)
+	err := c.cc.Invoke(ctx, "/OAMServer/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OAMServerServer is the server API for OAMServer service.
 // All implementations should embed UnimplementedOAMServerServer
 // for forward compatibility
@@ -439,6 +451,9 @@ type OAMServerServer interface {
 	UpdatePlatAndLicense(context.Context, *AddPlatRequest) (*PlatReply, error)
 	// 获取平台license日志
 	ListLicenseLog(context.Context, *PlatLicenseLogQuery) (*ListLicenseLogReply, error)
+	// 管理员管理
+	// 登录接口
+	Login(context.Context, *LoginRequest) (*LoginReply, error)
 }
 
 // UnimplementedOAMServerServer should be embedded to have forward compatible implementations.
@@ -537,6 +552,9 @@ func (UnimplementedOAMServerServer) UpdatePlatAndLicense(context.Context, *AddPl
 }
 func (UnimplementedOAMServerServer) ListLicenseLog(context.Context, *PlatLicenseLogQuery) (*ListLicenseLogReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLicenseLog not implemented")
+}
+func (UnimplementedOAMServerServer) Login(context.Context, *LoginRequest) (*LoginReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 
 // UnsafeOAMServerServer may be embedded to opt out of forward compatibility for this service.
@@ -1108,6 +1126,24 @@ func _OAMServer_ListLicenseLog_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OAMServer_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAMServerServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/OAMServer/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAMServerServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OAMServer_ServiceDesc is the grpc.ServiceDesc for OAMServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1238,6 +1274,10 @@ var OAMServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLicenseLog",
 			Handler:    _OAMServer_ListLicenseLog_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _OAMServer_Login_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -263,6 +263,8 @@ message PlatLicenseLog {
     string from = 13;
     // 操作时间
     int64 createtime = 14;
+    // 操作人
+    string operator = 15;
 }
 
 // 平台授权操作日志的查询信息

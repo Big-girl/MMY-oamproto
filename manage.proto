@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+// 登录接口的请求参数
+message LoginRequest{
+   // 管理员名称
+   string username = 2;
+   // 密码
+   string password = 3;
+}
+
+// 登录接口的返回参数
+message LoginReply{
+    // 登录token,token为空的话说明登录失败
+    string token = 1;
+    // 错误信息提示
+    string message = 2;
+ }

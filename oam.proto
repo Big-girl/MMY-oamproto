@@ -10,12 +10,13 @@ import "policylib.proto";
 import "modelversion.proto";
 import "tenant.proto";
 import "plat.proto";
+import "manage.proto";
 // 在proto目录下执行下面两个命令
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --go_out=. --go-grpc_out=require_unimplemented_servers=false:. *.proto
 // protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis --grpc-gateway_out=logtostderr=true:. *.proto
 service OAMServer{
-     // 服务测试接口
-     rpc Ping(Pong)returns(Pong){
+    // 服务测试接口
+    rpc Ping(Pong)returns(Pong){
         option (google.api.http) ={
             post:"/oam/ping",
             body:"*"
@@ -229,6 +230,14 @@ service OAMServer{
     rpc ListLicenseLog (PlatLicenseLogQuery) returns (ListLicenseLogReply){
         option (google.api.http)= {
             post:"/oam/list/licenselog"
+            body:"*"
+        };
+    }
+    // 管理员管理
+    // 登录接口
+    rpc Login(LoginRequest)returns(LoginReply){
+        option (google.api.http) ={
+            post:"/oam/login",
             body:"*"
         };
     }
